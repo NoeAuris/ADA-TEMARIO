@@ -1,0 +1,137 @@
+Practica - Archivos avanzado
+Ejercicios y dudas clase pasada
+Cuestionario para charlar dudas
+https://forms.gle/FwwbktSoDEvux6wo9
+
+Código del cuestionario
+https://www.online-python.com/7KF06mjt2W
+
+Archivos avanzado
+Persistencia de datos
+Se llama persistencia a la capacidad de guardar la información de un programa para poder volver a utilizarla en otro momento. Es lo que los usuarios conocen como Guardar el archivo y después Abrir el archivo. Pero para un programador puede significar más cosas y suele involucrar un proceso de serialización de los datos a un archivo o a una base de datos (que veremos en un par de clases) o a algún otro medio similar, y el proceso inverso de recuperar los datos a partir de la información serializada.
+
+Por ejemplo, supongamos que en el desarrollo de un juego se quiere guardar en un archivo la información referente a los ganadores, el puntaje máximo obtenido y el tiempo de juego en el que obtuvieron ese puntaje.
+
+En el juego, esa información podría estar almacenada en una lista de tuplas:
+
+[(nombre1, puntaje1, tiempo1), (nombre2, puntaje2, tiempo2), ...]
+
+
+Nota: Las tuplas en Python son un tipo o estructura de datos que permite almacenar datos de una manera muy parecida a las listas, con la salvedad de que son inmutables. Las tuplas en Python o tuples son muy similares a las listas, pero con dos diferencias. Son inmutables, lo que significa que no pueden ser modificadas una vez declaradas, y en vez de inicializarse con corchetes se hace con ()
+
+Esta información se puede guardar en un archivo de muchas formas distintas. En este caso, para facilitar la lectura del archivo de puntajes para los humanos, se decide guardarlos en un archivo de texto, donde cada tupla ocupará una línea y los valores de las tuplas estarán separados por comas.
+
+Ejemplo: Módulo para guardar y recuperar puntajes en un archivo
+
+#! /usr/bin/env python
+# encoding: latin1
+
+def guardar_puntajes(nombre_archivo, puntajes):
+    """ Guarda la lista de puntajes en el archivo.
+    Pre: nombre_archivo corresponde a un archivo válido,
+         puntajes corresponde a una lista de tuplas de 3 elementos.
+    Post: se guardaron los valores en el archivo,
+          separados por comas.
+    """
+
+    archivo = open(nombre_archivo, "w")
+    for nombre, puntaje, tiempo in puntajes:
+        archivo.write(nombre+","+str(puntaje)+","+tiempo+"\n")
+    archivo.close()
+
+def recuperar_puntajes(nombre_archivo):
+    """ Recupera los puntajes a partir del archivo provisto.
+        Devuelve una lista con los valores de los puntajes.
+    Pre: el archivo contiene los puntajes en el formato esperado,
+         separados por comas
+    Post: la lista devuelta contiene los puntajes en el formato:
+          [(nombre1,puntaje1,tiempo1),(nombre2,puntaje2,tiempo2)].
+    """
+
+    puntajes = []
+    archivo = open(nombre_archivo, "r")
+    for linea in archivo:
+        nombre, puntaje, tiempo = linea.replace("\n", "").split(",")
+        puntajes.append((nombre,int(puntaje),tiempo))
+    archivo.close()
+    return puntajes
+
+ 
+>>> import puntajes
+>>> valores = [("Pepe", 108, "4:16"), ("Juana", 2315, "8:42")]
+>>> puntajes.guardar_puntajes("puntajes.txt", valores)
+>>> recuperado = puntajes.recuperar_puntajes("puntajes.txt")
+>>> print recuperado
+[('Pepe', 108, '4:16'), ('Juana', 2315, '8:42')]
+
+
+Guardar el estado de un programa se puede hacer tanto en un archivo de texto, como en un archivo binario. En muchas situaciones es preferible guardar la información en un archivo de texto, ya que de esta manera es posible modificarlo fácilmente desde cualquier editor de textos. En general, los archivos de texto van a desperdiciar un poco más de espacio, pero son más faciles de entender y fáciles de usar desde cualquier programa.
+
+Por otro lado, en un archivo binario bien definido se puede evitar el desperdicio de espacio, o también hacer que sea más rápido acceder a los datos. Además, para ciertas aplicaciones como archivos de sonido o video, tendría poco sentido almacenarlos en archivos de texto. En definitiva, la decisión de qué formato usar queda a discreción del programador. Es im-portante recordar que el sentido común es el valor más preciado en un programador.
+
+Persistencia en archivos CSV
+Un formato que suele usarse para transferir datos entre programas es CSV (del inglés comma separated values: valores separados por comas) es un formato bastante sencillo, tanto para leerlo como para procesarlo desde el código, se parece al formato visto en el ejemplo anteriormente.
+
+Nombre,Apellido,Telefono,Cumpleaños
+"John","Smith","555-0101","1973-11-24"
+"Jane","Smith","555-0101","1975-06-12"
+
+En el ejemplo se puede ver una pequeña base de datos. En la primera línea del archivo tenemos los nombres de los campos, un dato opcional desde el punto de vista del procesamiento de la información, pero que facilita entender el archivo.
+
+En las siguientes líneas se ingresan los datos de la base de datos, cada campo separado por comas. Los campos que son cadenas se suelen escribir entre comillas dobles, si alguna cadena contiene alguna comilla doble se la reemplaza por \" y una contrabarra se escribe como \\.
+
+En Python es bastante sencillo procesar de este tipo de archivos, tanto para la lectura como para la escritura, mediante el módulo csv que ya se encuentra preparado para eso. La funciones del ejemplo anterior podría programarse mediante el módulo csv.
+
+Si se prueba este código, se obtiene un resultado idéntico al obtenido anteriormente:
+
+puntajes_csv.py
+
+#! /usr/bin/env python
+# encoding: latin1
+
+import csv
+
+def guardar_puntajes(nombre_archivo, puntajes):
+    """ Guarda la lista de puntajes en el archivo.
+    Pre: nombre_archivo corresponde a un archivo válido,
+         puntajes corresponde a una lista de secuencias de elementos.
+    Post: se guardaron los valores en el archivo,
+          separados por comas.
+    """
+
+    archivo = open(nombre_archivo, "w")
+    archivo_csv = csv.writer(archivo)
+    archivo_csv.writerows(puntajes)
+    archivo.close()
+
+def recuperar_puntajes(nombre_archivo):
+    """ Recupera los puntajes a partir del archivo provisto.
+        Devuelve una lista con los valores de los puntajes.
+    Pre: el archivo contiene los puntajes en el formato esperado,
+         separados por comas
+    Post: la lista devuelta contiene los puntajes en el formato:
+          [(nombre1,puntaje1,tiempo1),(nombre2,puntaje2,tiempo2)].
+    """
+    puntajes = []
+    archivo = open(nombre_archivo, "r")
+    archivo_csv = csv.reader(archivo)
+    for nombre, puntaje, tiempo in archivo_csv:
+        puntajes.append((nombre, int(puntaje), tiempo))
+    archivo.close()
+    return puntajes
+
+
+>>> import puntajes_csv                                                     
+>>> valores = [("Pepe", 108, "4:16"), ("Juana", 2315, "8:42")]
+>>> puntajes_csv.guardar_puntajes("puntajes.txt", valores)
+>>> recuperado = puntajes_csv.recuperar_puntajes("puntajes.txt")
+>>> print recuperado
+[('Pepe', 108, '4:16'), ('Juana', 2315, '8:42')]
+
+
+Es importante notar, entonces, que al utilizar el módulo csv en lugar de hacer el procesamiento en forma manual, se obtiene un comportamiento más robusto, ya que el módulo csv tiene en cuenta muchos más casos que nuestro código original no. Por ejemplo, el código anterior no tenía en cuenta que el nombre pudiera contener una coma.
+
+Ejemplos de Persistencia
+Recordemos el ejercicio de Ejercicios integradores 1 que nos pedía implementar una agenda.
+
+Agregamos ahora la complejidad de guardar la agenda en un archivo la agenda, y recuperarla cada vez que comienza el programa.

@@ -1,0 +1,203 @@
+Capturar Excepciones, Diccionarios
+Ejercicios y dudas clase pasada
+Repaso: Formas de correr código Python
+Uso del interprete
+Al instalar python3 el ejecutable del interprete lo podemos encontrar en /usr/bin/python3 (en debian Stretch). Este directorio por defecto está en el PATH, por lo tanto lo podemos ejecutar directamente en el terminal, para ello ejecutamos:
+
+$ python3
+Python 3.10.0 (default, Oct 13 2021, 06:45:00) [Clang 13.0.0 (clang-1300.0.29.3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+
+
+A partir de un fichero con el código fuente
+Si tenemos nuestro programa en un fichero fuente (suele tener extensión py), por ejemplo programa.py,lo ejecutaríamos de la siguiente manera.
+
+$ python3 programa.py
+
+Desde el IDE (PyCharm)
+Po ser el preferido de la comunidad Python, el IDE que elegimos en este curso es el PyCharm (ver clase 1 para instalarlo). La forma que recomiendo y vamos a usar en las clases es correr el código direcctamente desde PyCharm:
+
+
+Capturando Excepciones
+Las palabras clave assert, try, except, finally y raise están relacionadas con las excepciones, y nos permiten tratar el qué hacer cuando las cosas no salen como esperamos. El siguiente código intenta hacer un cast de cadena a entero, manejando un posible error.
+
+Si x="10" el casteo se realiza sin problemas, ya que es posible representar esa cadena como un entero. Sin embargo hay que estar preparados siempre para lo peor. Si x="a" no se podría hacer int() y tendríamos un error. Si no manejamos este error, el programa se pararía, y esto no es algo deseable. El uso de try, except y finally nos permite controlar dicho error y actuar en consecuencia sin que el programa se pare. x = "10"
+
+valor = None
+try:
+    valor = int(x)
+except Exception as exception:
+    print("Hubo un error:", exception)
+finally:
+    print("El valor es", valor)
+
+# Salida: El valor es 10
+
+Listas
+Las listas en Python son un tipo contenedor, compuesto, que se usan para almacenar conjuntos de elementos relacionados del mismo tipo o de tipos distintos. Para crear una lista en Python, simplemente hay que encerrar una secuencia de elementos separados por comas entre paréntesis cuadrados [].
+
+Por ejemplo, para crear una lista con los números del 1 al 10 se haría del siguiente modo:
+
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+Las listas pueden almacenar elementos de distinto tipo. La siguiente lista también es válida:
+
+elementos = [3, 'a', 8, 7.2, 'hola']
+
+Incluso pueden contener otros elementos compuestos, como objetos u otras listas:
+
+lista = [1, ['a', 'e', 'i', 'o', 'u'], 8.9, 'hola']
+
+Las listas también se pueden crear usando el constructor de la clase, list(iterable). En este caso, el constructor crea una lista cuyos elementos son los mismos y están en el mismo orden que los ítems del iterable. El objeto iterable puede ser o una secuencia, un contenedor que soporte la iteración o un objeto iterador.
+
+Por ejemplo, el tipo str también es un tipo secuencia. Si pasamos un string al constructor list() creará una lista cuyos elementos son cada uno de los caracteres de la cadena:
+
+vocales = list('aeiou')
+vocales
+['a', 'e', 'i', 'o', 'u']
+
+Dos alternativas de crear una lista vacía:
+
+lista_1 = []  # Opción 1
+lista_2 = list()  # Opción 2
+
+Cómo acceder a los elementos de una lista en Python
+Para acceder a un elemento de una lista se utilizan los índices. Un índice es un número entero que indica la posición de un elemento en una lista. El primer elemento de una lista siempre comienza en el índice 0.
+
+Por ejemplo, en una lista con 4 elementos, los índices de cada uno de los ítems serían 0, 1, 2 y 3.
+
+lista = ['a', 'b', 'd', 'i', 'j']
+lista[0]  # Primer elemento de la lista. Índice 0
+'a'
+lista[3]  # Cuarto elemento de la lista. Índice 3
+'i'
+
+Si se intenta acceder a un índice que está fuera del rango de la lista, el intérprete lanzará la excepción IndexError. De igual modo, si se utiliza un índice que no es un número entero, se lanzará la excepción TypeError:
+
+lista = [1, 2, 3]  # Los índices válidos son 0, 1 y 2
+lista[8]
+
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+IndexError: list index out of range
+
+lista[1.0]
+
+>>> Traceback (most recent call last):
+>>> File "<input>", line 1, in <module>
+>>> TypeError: list indices must be integers or slices, not float
+
+
+Agregar elementos
+lista = [1, 2, 3]  # Los índices válidos son 0, 1 y 2
+lista.append(4)
+lista
+[1, 2, 3, 4]
+
+Longitud (len) de una lista en Python
+Como cualquier tipo secuencia, para conocer la longitud de una lista en Python se hace uso de la función len(). Esta función devuelve el número de elementos de una lista:
+
+vocales = ['a', 'e', 'i', 'o', 'u']
+len(vocales)
+
+Cómo saber si un elemento está en una lista en Python
+Ya adelanté en la clase anterior, que para saber si un elemento está contenido en una lista, se utiliza el operador de pertenencia in:
+
+vocales = ['a', 'e', 'i', 'o', 'u']
+if 'a' in vocales:
+...     print('Sí')
+...     
+Sí
+if 'b' not in vocales:
+...     print('No')
+...     
+No
+
+Listado de métodos de la clase list
+Termino este tutorial mostrando la lista completa de métodos de la clase list:
+
+
+Diccionarios
+Los diccionarios en Python son una estructura de datos que permite almacenar su contenido en forma de llave y valor.
+
+Crear diccionario Python
+Un diccionario en Python es una colección de elementos, donde cada uno tiene una llave key y un valor value. Los diccionarios se pueden crear con paréntesis {} separando con una coma cada par key: value. En el siguiente ejemplo tenemos tres keys que son el nombre, la edad y el documento.
+
+dicc1 = {
+  "Nombre": "Sara",
+  "Edad": 27,
+  "Documento": 1003882
+}
+print(dicc1)
+#{'Nombre': 'Sara', 'Edad': 27, 'Documento': 1003882}
+
+Algunas propiedades de los diccionario en Python son las siguientes:
+
+Son dinámicos, pueden crecer o decrecer, se pueden añadir o eliminar elementos.
+Son indexados, los elementos del diccionario son accesibles a través del key.
+Y son anidados, un diccionario puede contener a otro diccionario en su campo value.
+Acceder y modificar elementos
+Se puede acceder a sus elementos con [] o también con la función get()
+
+print(dicc1['Nombre'])     #Sara
+print(dicc1.get('Nombre')) #Sara
+
+La diferencia entre las dos opciones anteriores es qué sucede si la clave 'Nombre' no existe:
+
+print(dicc1.get('Nombre'))
+None
+print(dicc1['Nombre'])
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+KeyError: 'Nombre'
+
+Por esta razón, para evitar una Exception, se recomienda el uso de get()
+
+Para modificar un elemento basta con usar [] con el nombre del key y asignar el valor que queremos.
+
+dicc1['Nombre'] = "Laura"
+print(dicc1)
+#{'Nombre': Laura', 'Edad': 27, 'Documento': 1003882}
+
+Agregar elementos
+Si el key al que accedemos no existe, se añade automáticamente.
+
+dicc1['Direccion'] = "Calle 123"
+print(dicc1)
+#{'Nombre': 'Laura', 'Edad': 27, 'Documento': 1003882, 'Direccion': 'Calle 123'}
+
+
+Iterar diccionario
+Los diccionarios se pueden iterar de manera muy similar a las listas u otras estructuras de datos. Para iterar por clave y valor utilizamos el metodo items()
+
+# Imprime clave y valor del diccionario
+for clave, valor in dicc1.items():
+    print(f'clave: {clave} y valor: {valor}')
+
+También podriamos iterar solamente las claves utilizando el metodo keys()
+
+# Imprime claves del diccionario
+for clave in dicc1.keys():
+    print(f'clave: {clave}')
+
+
+Diccionarios anidados
+Supongamos que queremos implementar una agenda de contactos del celular. Cada uno de los contactos en nuestra agenda es un diccionario con nombre y teléfono, y ademas, la agenda es un diccionario. Veamos el ejemplo:
+
+agenda = {
+"Maria": {
+  "Teléfono celular": "123456789",
+  "Direccion": "Calle Falsa 123"
+  },
+"Laura": {
+  "Teléfono celular": "023456789",
+  "Direccion": "Otra Calle 123"
+  },
+"Monica": {
+  "Teléfono celular": "223456789",
+  "Direccion": ""
+  },
+}
+
+Ejercicio 1: Hacer un programa que permita agregar contactos a la agenda Ejercicio 2: Hacer un programa que permita buscar contactos en la agenda

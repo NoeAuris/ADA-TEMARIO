@@ -1,0 +1,140 @@
+Ejercicios y dudas clase pasada
+Recordemos objetos
+Los objetos son una manera de organizar datos y de relacionar esos datos con el código apropiado para manejarlo. Son los protagonistas de un paradigma de programación llamado Programación Orientada a Objetos. Nosotros ya usamos objetos en Python sin mencionarlo explícitamente. Es más, todos los tipos de datos que Python nos provee son, en realidad, objetos. De forma que, cuando utilizamos miarchivo.readline(), le estamos diciendo a Python que llame a la función readline del tipo file para miarchivo que es lo mismo que decir que llame al método readline del objeto miarchivo. A su vez, a las variables que un objeto contiene, se las llama atributos.
+
+La Programación Orientada a Objetos introduce bastante terminología, y una gran parte es simplemente darle un nuevo nombre a cosas que ya estuvimos usando. Esto si bien parece raro es algo bastante común en el aprendizaje humano.
+
+Para poder pensar abstractamente, los humanos necesitamos asignarle distintos nombres a cada cosa o proceso. De la misma manera, para poder hacer un cambio en una forma de ver algo ya establecido (realizar un cambio de paradigma), suele ser necesario cambiar la forma de nombrar a los elementos que se comparten con el paradigma anterior, ya que sino es muy difícil realizar el salto al nuevo paradigma.
+
+En los temas que vimos hasta ahora nos hemos encontrado con numerosos tipos provistos por Python, los números, las cadenas de caracteres, las listas, las tuplas, los diccionarios, los archivos, etc. Cada uno de estos tipos tiene sus características, tienen operaciones propias de cada uno y nos proveen una gran cantidad de funcionalidades que podemos utilizar para nuestros programas.
+
+Como ya se dijo en clases anteriores, para saber de qué tipo es una variable, utilizamos la función type, y para saber qué métodos y atributos tiene esa variable utilizamos la función dir.
+
+>>> a = open("archivo.txt")
+>>> type(a)
+<type 'file'>
+>>> dir(a)
+['__class__', '__delattr__', '__doc__', '__enter__', '__exit__',
+'__getattribute__', '__hash__', '__init__', '__iter__', '__new__',
+'__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__str__',
+'close', 'closed', 'encoding', 'fileno', 'flush', 'isatty', 'mode', 'name',
+'newlines', 'next', 'read', 'readinto', 'readline', 'readlines', 'seek',
+'softspace', 'tell', 'truncate', 'write', 'writelines', 'xreadlines']
+
+
+En Python, todos los tipos son objetos. Pero no en todos los lenguajes de programación es así. En general, podemos decir que un objeto es una forma ordenada de agrupar datos (los atributos) y operaciones a utilizar sobre esos datos (los métodos). Es importante notar que cuando decimos objetos podemos estar haciendo referencia a dos cosas parecidas, pero distintas.
+
+Por un lado, la definición del tipo, donde se indican cuáles son los atributos y métodos que van a tener todas las variables que sean de ese tipo. Esta definición se llama específicamente, la clase del objeto, y vimos un poco de esto en la clase 5. A partir de una clase es posible crear distintas variables que son de ese tipo. A las variables que son de una clase en particular, se las llama instancia de esa clase.
+
+Métodos especiales
+Así como el constructor, init, existen diversos métodos especiales que, si están definidos en nuestra clase, Python los llamará por nosotros cuando se utilice una instancia en situaciones particulares.
+
+Un método para mostrar objetos
+Para mostrar objetos, Python indica que hay que agregarle a la clase un método especial, llamado __str__ que debe devolver una cadena de caracteres con lo que queremos mostrar. Ese método se invoca cada vez que se llama a la función str.
+
+El método __str__ tiene un solo parámetro, self.
+
+En nuestro caso podemos agregar el siguiente método dentro de la clase Animal:
+
+def __str__(self):
+    """ Muestra datos del animal"""
+    return "{self.especie} de {self.edad} anios de edad"
+
+
+Polimorfismo
+El concepto de polimorfismo (del griego muchas formas) implica que si en una porción de código se invoca un determinado método de un objeto, podrán obtenerse distintos resultados según la clase del objeto. Esto se debe a que distintos objetos pueden tener un método con un mismo nombre, pero que realice distintas operaciones.
+
+Por otro lado, recién vimos también que al construir una clase, es posible incluir el método str para que cuando se quiera imprimir el objeto se lo haga de la forma deseada; así como una gran variedad de otros métodos especiales, que permiten que operadores comunes sean utilizados sobre distintos tipos de objetos.
+
+Interfaz
+Llamamos interfaz a un conjunto de funciones, métodos o atributos con nombres específicos. Una interfaz es un contrato entre el programador que realiza una clase y el que la utiliza, puede consistir en uno solo o varios métodos o atributos.
+
+La idea de polimorfismo se basa, entonces, en utilizar distintos tipos de datos a través de una interfaz común. Llamamos redefinición a la acción de definir un método con el mismo nombre en distintas clases, de forma tal que provea una interfaz.
+
+Un bloque de código será polimórfico cuando dentro de ese código se realicen llamadas a métodos que puedan estar redefinidos en distintas clases.
+
+Tomemos por ejemplo el caso ya mencionado en el que se recorre una secuencia (lista, tupla, archivo, etc) mediante una misma estructura de código. Esto es posible gracias a la redefinición del método especial iter, que devuelve un iterador. Un bloque que utiliza una secuencia en forma genérica es, entonces, un bloque polimórfico.
+
+En la vida real, cuando analizamos las funciones de respiración, reproducción o alimentación, de los seres vivos vemos que siempre se repite el mismo patrón: si bien la acción en todos los casos es la misma, puede suceder que haya diferencias en la implementación en cada tipo, ya que no es lo mismo la respiración de una mojarrita que la de un malvón, no es lo mismo la reproducción de una ameba que la de un elefante.
+
+De la misma forma, al implementar nuestras clases, debemos proveer distintas implementaciones de los métodos que se llaman igual, para que puedan comportarse polimórficamente, como ser las redefiniciones de los métodos str visto recien.
+
+Un ejemplo de polimorfismo
+
+Usar un diccionario para contar la frecuencia de aparación de elementos dentro de una secuencia cualquiera.
+
+def frecuencias(secuencia):
+    """ Calcula las frecuencias de aparición de los elementos de
+        la secuencia recibida.
+        Devuelve un diccionario con elementos: {valor: frecuencia}
+    """
+    # crea un diccionario vacío
+    frec = dict()
+    # recorre la secuencia
+    for elemento in secuencia:
+        frec[elemento] = frec.get(elemento, 0) + 1
+    return frec
+
+
+Vemos que el parámetro secuencia puede ser de cualquier tipo que se encuentre dentro de la "familia" de las secuencias. En cambio, si llamamos a la función con un entero se levanta una excepción.
+
+>>> frecuencias(["peras", "manzanas", "peras", "manzanas", "uvas"])
+{'uvas': 1, 'peras': 2, 'manzanas': 2}
+>>> frecuencias((1,3,4,2,3,1))
+{1: 2, 2: 1, 3: 2, 4: 1}
+>>> frecuencias("Una frase")
+{'a': 2, ' ': 1, 'e': 1, 'f': 1, 'n': 1, 's': 1, 'r': 1, 'U': 1}
+>>> ran = xrange(3, 10, 2)
+>>> frecuencias(ran)
+{9: 1, 3: 1, 5: 1, 7: 1}
+>>> frecuencias(4)
+Traceback (most recent call last):
+    File "<pyshell\#0>", line 1, in <module>
+        frecuencias(4)
+    File "frecuencias.py", line 12, in frecuencias
+        for v in seq:
+    TypeError: 'int' object is not iterable
+
+
+Herencia
+La herencia es un mecanismo de la programación orientada a objetos que sirve para crear clases nuevas a partir de clases preexistentes. Se toman (heredan) atributos y comportamientos de las clases viejas y se los modifica para modelar una nueva situación. La clase vieja se llama clase base o padre y la que se construye a partir de ella es una clase derivada.
+
+Por ejemplo, a partir de una clase Persona (que contenga como atributos identificacion, nombre, apellido) podemos construir la clase AlumnaADA que extiende a Persona y agrega como atributo el usuario de Discord.
+
+Para indicar el nombre de la clase base, se la pone entre paréntesis a continuación del nombre de la clase (en lugar de la expresión object que poníamos anteriormente; en realidad object es el nombre de la clase base genérica).
+
+Definimos Persona:
+
+class Persona(object):
+    "Clase que representa una persona."
+    def __init__(self, identificacion, nombre, apellido):
+        "Constructor de Persona"
+        self.identificacion = identificacion
+        self.nombre = nombre
+        self.apellido = apellido
+    def __str__(self):
+        return " %s: %s, %s" %
+            (str(self.identificacion), self.apellido, self.nombre)
+
+
+A continuación definimos AlumnaADA como derivada de Persona, de forma tal que inicialice el nuevo atributo, pero a su vez utilice la inicialización de Persona para las atributos de la clase base:
+
+class AlumnaADA(Persona):
+    "Clase que representa a un alumna de ADA."
+    def __init__(self, identificacion, nombre, apellido, usuario):
+        "Constructor de AlumnaADA"
+        # llamamos al constructor de Persona
+        Persona.__init__(self, identificacion, nombre, apellido)
+        # agregamos el nuevo atributo
+        self.usuario = usuario
+# Probamos la nueva clase:
+
+>>> a = AlumnaADA("DNI 123456", "Daniela", "Lopez", "Daniita")
+>>> print a
+DNI 123456: Lopez, Daniela
+
+
+Vemos que se heredó el método str de la clase base. Si queremos, podemos redefinirlo.
+
+Delegación
+Llamamos delegación a la situación en la que una clase contiene (como atributos) una o más instancias de otra clase, a las que delegará parte de sus funcionalidades. Esta relación entre clases suele ser la más indicada cuando es necesaria una asociación entre las clases pero el principio de Liskov no se cumple. También puede verse como la relación entre clases "S contiene a T". Por ejemplo, Vehículo contiene un Motor, pero Alumno no contiene a Persona, sino que es una Persona.

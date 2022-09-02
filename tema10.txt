@@ -1,0 +1,207 @@
+Git - Practica Web
+Un poco mas sobre Clases y Objetos
+A partir de ahora, cuando creemos una clase, por defecto vamos a hacer que herede de la clase padre object. Esto es para asegurar compatibilidad entre Python 2 y 3.
+
+Agregación
+La clase ClaseB forma una relación de agregación con la clase ClaseA, ya que hace referencia a un objeto ClaseA independiente cuando se inicializa, como uno de sus atributos. Mientras que un objeto ClaseB depende de ClaseA, en caso de destrucción de ClaseB, ClaseA seguirá existiendo, ya que es independiente de ClaseB.
+
+Disculpas por las variables sin nombre, por una razón didactica la realidad es que no nos interesa el contenido:
+
+class ClaseA(object):
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def addNums():
+        self.b + self.c
+
+class ClaseB(object):
+    def __init__(self, d, e, A):
+        self.d = d
+        self.e = e
+        self.A = A
+
+    def addAllNums(self):
+        x = self.d + self.e + self.A.b + self.A.c
+        return x
+
+tinga = ClaseA("yo", 2, 6)
+ling = ClaseB(5, 9, tinga)
+
+print ling.addAllNums()
+
+Composición
+Al igual que la agregación, sin embargo, en lugar de hacer referencia a un objeto independiente, ClaseB en realidad inicializa una instancia de ClaseA en su propio constructor como un atributo. Si el objeto ClaseB se destruye, también lo es el objeto ClaseA. Es por eso que la composición es una relación tan fuerte.
+
+class ClaseA(object):
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def addNums():
+        self.b + self.c
+
+class ClaseB(object):
+    def __init__(self, d, e):
+        self.d = d
+        self.e = e
+        self.A = A("yo", 2, 6)
+
+    def addAllNums(self):
+        x = self.d + self.e + self.A.b + self.A.c
+        return x
+
+ling = ClaseB(5, 9)
+
+print ling.addAllNums() 
+
+GitHub
+Github es un servicio web de control de versiones y desarrollo de software colaborativo basado en Git. Existen otros parecidos por ejemplo GitLab y Bitbucket.
+
+Github es en sí un portal creado para alojar el código de las aplicaciones de cualquier desarrollador, y que fue comprada por Microsoft en junio del 2018. La plataforma está creada para que los desarrolladores suban el código de sus aplicaciones y herramientas, y que como usuario no sólo puedas descargarte la aplicación, sino también entrar a su perfil para leer sobre ella o colaborar con su desarrollo. Github permite que los desarrolladores alojen proyectos creando repositorios de forma gratuita. Pero hay que tener una cosa en mente, y es que para poder subir gratis los proyectos deberán ser de código abierto. Y no quieres que tu aplicación sea de código abierto, la plataforma también tiene una versión de pago para alojar proyectos de forma privada.
+
+Como te hemos mencionado más arriba, en Github también puedes entrar a los proyectos de los demás y colaborar para mejorarlos. Esto quiere decir que los usuarios pueden opinar, dejar sus comentarios sobre el código, colaborar y contribuir mejorando el código. También pueden reportar errores para que los desarrolladores lo mejoren.
+
+Creando nuestro repositorio
+
+1 - En github.com creamos nuestro repositorio llamado: intro-python-ada
+
+2 - Descargamos https://desktop.github.com/ que nos permitirá hacer los commits y subir el código de manera gráfica
+
+Al abrirlo deberemos poner nuestro usuario y contraseña.
+
+3 - Elegimos el repositorio que acabamos de crear.
+
+4 - Abrimos el PyCharm y Abrirmos esa nueva carpeta.
+
+5 - Para subir los cambios debemos primero commitear, y luego pushear:
+
+Nota: Podemos crear el repositorio directamente desde el programa GitHub Desktop. Tengan en cuenta que el repositorio debe quedar publico:
+
+.gitignore
+Una vez que creamos nuestro repositorio, debemos tener en cuenta el archivo .gitignore El punto antes del nombre significa que es un archivo oculto. La idea de este archivo es listar todos los tipos de archivos (o carpetas) que no queremos subir a nuestro repositorio. Este file debe commitearse como cualquier otro archivo de Python.
+
+Un ejemplo de .gitignore es:
+
+# Lo agregamos en clase
+.idea
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+Servicios Web
+Un servidor web es un software que forma parte del servidor y tiene como misión principal devolver información (páginas) cuando recibe peticiones por parte de los usuarios. En otras palabras, es el software que permite que los usuarios que quieren ver una página web en su navegador puedan hacerlo. Para el funcionamiento correcto de un servidor web necesitamos un cliente web que realice una petición http o https a través de un navegador como Chrome, Firefox o Safari y un servidor donde esté almacenada la información.
+
+El proceso sería el siguiente:
+
+Tras la primera consulta por parte del usuario hacia una web, se establece una conexión entre el servidor DNS y el ordenador que realiza la consulta o petición. Este servidor DNS responde con la dirección IP correcta del servidor web donde está alojado el contenido solicitado.
+
+El siguiente paso sería solicitar el contenido al servidor web mediante el protocolo HTTP/HTTPS.
+
+Una vez que el servidor web ha recibido la solicitud del contenido solicitado por el cliente web, deberá procesar la solicitud hasta encontrar el contenido solicitado dentro del dominio correspondiente.
+
+Envía el contenido solicitado al cliente web que lo solicitó.
+
+¿Cuál es la diferencia entre servidor web y hosting?
+Los servidores permiten alojar contenidos que luego son distribuidos de múltiples maneras, la más común hoy día son las páginas web, si bien que los contenidos distribuidos mediante Apps cada vez cobran más protagonismo. La diferencia entre servidor web y hosting más destacada estriba en el presupuesto disponible y los conocimientos para administrar o no un servicio de esta naturaleza con lo que eso conlleva y gestionar adecuadamente los recursos disponibles. En base a esto la pregunta adecuada sería ¿para qué vas a utilizar el servicio de alojamiento web? y en base a eso y a tu presupuesto y conocimientos en administración de sistemas podrás decantarte por contratar hosting web o un servidor web.
+
+Servidor Web con Flask
+Flask es un “micro” Framework escrito en Python y concebido para facilitar el desarrollo de Aplicaciones Web bajo el patrón MVC.
+
+La palabra “micro” no designa a que sea un proyecto pequeño o que nos permita hacer páginas web pequeñas sino que al instalar Flask tenemos las herramientas necesarias para crear una aplicación web funcional pero si se necesita en algún momento una nueva funcionalidad hay un conjunto muy grande extensiones (plugins) que se pueden instalar con Flask que le van dotando de funcionalidad.
+
+De principio en la instalación no se tienen todas las funcionalidades que se pueden necesitar pero de una manera muy sencilla se pueden extender el proyecto con nuevas funcionalidades por medio de plugins.
+
+Instalacion
+En Pycharm, podemos ir a la pestaña inferior que dice Terminal y escribir:
+
+pip install flask
+
+Ejemplo base de un servidor
+from flask import *
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+   template_data = {
+      'titulo' : 'Esto es Python en Ada',
+   }
+   return render_template('home.html', **template_data)
+
+if __name__ == '__main__':
+   app.run(host='0.0.0.0', port=8000, debug=True)
+
+
+Recordar que debemos agregar el home.html
+
+<html>
+<head>
+   <title>Hola Chicas! cómo andan?</title>
+</head>
+<body>
+    <h1>Titulo: {{ titulo }}</h1>
+</body>
+</html>
+
+🚀 Recursos de la clase
+https://learngitbranching.js.org/?locale=es_AR
+
+https://github.com/Ada-IT/bootcamp-frontend/tree/master/01_git
+
+http://rogerdudler.github.io/git-guide/index.es.html

@@ -1,0 +1,89 @@
+Herramientas
+Ejercicios y dudas Trabajo Final
+Para el trabajo final tenemos que completar todos los ejercicios. El resultado debería verse masomenos asi:
+
+Vista de Trabajo Final
+
+Nota: Hay un tema con la forma de acceder a las cuentas y los archivos de gastos.csv. transferencias.csv y depositos.csv que teníamos de ejemplo para los ejercicios. Tener en cuenta que tenemos que modificarlos!
+
+Testing en Python
+Dentro de la ingeniería software y la programación en general, el testing es una de las partes más importantes que nos encontraremos en casi cualquier proyecto. De hecho es común dedicar más tiempo a probar que el código funciona correctamente que a escribirlo. A continuación veremos las formas más comunes de testear el código en Python, desde lo más básico a conceptos algo más avanzados.
+
+Aunque sea la primera vez que leas acerca de testing en Python, estoy seguro de que ya has ejecutado tests sobre tu código sin darte cuenta. De acuerdo a su forma de ejecución, los podemos clasificar en:
+
+Tests manuales: Son tests ejecutados manualmente por una persona, probando diferentes combinaciones y viendo que el comportamiento del código es el esperado. Sin duda los has realizado alguna vez.
+
+Tests automáticos: Se trata de código que testea que otro código se comporta correctamente. La ejecución es automática, y permite ejecutar gran cantidad de verificaciones en muy poco tiempo. Es la forma más común, pero no siempre es posible automatizar todo.
+
+Ejemplo:
+
+tests.py
+
+def test_suma():
+    result = 2+2
+    assert result == 4
+
+pytest -s tests.py
+
+Git
+Como vimos en la clase 10, utilizar Git tiene muchas ventajas. En el curso no hicimos a tiempo a crear un repo colaborativo entre todas, pero es el uso mas frecuente en el ambito laboral. Imaginense 200 desarrolladores, trabajando sobre el mismo código. Para poder hacer eso posible existen distintas formas de trabajar con Git.
+
+La creación de ramas o branches es una función disponible en la mayoría de los sistemas de control de versiones modernos. La creación de ramas en otros sistemas de control de versiones puede tanto llevar mucho tiempo como ocupar mucho espacio de almacenamiento. En Git, las ramas son parte del proceso de desarrollo diario. Las ramas de Git son un puntero eficaz para las instantáneas de tus cambios. Cuando quieres añadir una nueva función o solucionar un error, independientemente de su tamaño, generas una nueva rama para alojar estos cambios. Esto hace que resulte más complicado que el código inestable se fusione con el código base principal, y te da la oportunidad de limpiar tu historial futuro antes de fusionarlo con la rama principal.
+
+Ramas
+
+El diagrama anterior representa un repositorio con dos líneas de desarrollo aisladas, una para una función pequeña y otra para una función más extensa. Al desarrollarlas en ramas, no solo es posible trabajar con las dos de forma paralela, sino que también se evita que el código dudoso se fusione con la rama main.
+
+La implementación que subyace a las ramas de Git es mucho más sencilla que la de otros modelos de sistemas de control de versiones. En lugar de copiar archivos entre directorios, Git almacena una rama como referencia a una confirmación. En este sentido, una rama representa el extremo de una serie de confirmaciones, es decir, no es un contenedor de confirmaciones. El historial de una rama se extrapola de las relaciones de confirmación.
+
+Una rama representa una línea independiente de desarrollo. Las ramas sirven como una abstracción de los procesos de cambio, preparación y confirmación. Puedes concebirlas como una forma de solicitar un nuevo directorio de trabajo, un nuevo entorno de ensayo o un nuevo historial de proyecto. Las nuevas confirmaciones se registran en el historial de la rama actual, lo que crea una bifurcación en el historial del proyecto.
+
+Les recomiendo leer mas sobre el tema porque es muy interesante, sirve para cualquier proyecto, cualquier lenguaje y es muy valorado en el ámbito laboral.
+
+Jupyter
+Jupyter Notebook, en adelante Jupyter, es un entorno de trabajo interactivo que permite desarrollar código en Python (por defecto, aunque veremos más adelante cómo permitir otros lenguajes) de manera dinámica, a la vez que integrar en un mismo documento tanto bloques de código como texto, gráficas o imágenes. Es un SaaS utilizado ampliamente en análisis numérico, estadística y machine learning, entre otros campos de la informática y las matemáticas.
+
+Lo primero que necesitamos es tener instalado Python 3, que ya vimos como hacerlo en las primeras clases. Una vez hecho, actualizamos vía terminal el gestor de paquetes de Python (pip) e instalamos Jupyter. Al arrancarlo, se abrirá una nueva ventana en nuestro navegador predefinido, y la terminal quedará bloqueada con el proceso. Podemos abrirlo en otro navegador, para lo cual se nos indica la URL en la salida por pantalla.
+
+python3 -m pip install --upgrade pip
+pip3 install jupyter
+jupyter notebook
+
+Pandas y Numpy
+Pandas es una librería de python destinada al análisis de datos, que proporciona unas estructuras de datos flexibles y que permiten trabajar con ellos de forma muy eficiente. Pandas ofrece las siguientes estructuras de datos:
+
+Series: Son arrays unidimensionales con indexación (arrays con índice o etiquetados), similar a los diccionarios. Pueden generarse a partir de diccionarios o de listas.
+
+DataFrame: Son estructuras de datos similares a las tablas de bases de datos relacionales como SQL.
+
+Para ver los ejemplos es necesario descargarnos esta librería (y la librería de Numpy). De nuevo, para ello lo vamos a descargar a través del repositorio de paquetes PyPi (con pip) de la siguiente manera:
+
+pip3 install pandas
+pip3 install numpy
+
+Pandas nos permite leer archivos csv y tratarlos como base de datos directamente. emisiones-2016.csv
+
+Ejemplo:
+
+# Generar un DataFrame con los datos de los cuatro ficheros
+import pandas as pd 
+
+emisiones_2016 = pd.read_csv('emisiones-2016.csv', sep = ';')
+print(emisiones_2016)
+
+
+Google Colab
+Siguiendo con la linea anterior, existe una herramienta muy similar a Jupyter pero online y nos la da Google. https://colab.research.google.com/
+
+La principal ventaja que ofrece esta herramienta es que libera a nuestra máquina de tener que llevar a cabo un trabajo demasiado costoso tanto en tiempo como en potencia o incluso nos permite realizar ese trabajo si nuestra máquina no cuenta con recursos suficientemente potentes. Y todo de forma gratuita.
+
+Otro de los beneficios que tiene lo indica el propio nombre, «Colaboratory», es decir, colaborativo, nos permite realizar tareas en la nube y compartir nuestros cuadernos si necesitamos trabajar en equipo.
+
+Vale la aclaración, cada celda es independiente, pero todas las celdas en un cuaderno utilizan el mismo kernel. El kernel es el motor de computación que está por debajo y que se encarga de ejecutar nuestro código y devolver el resultado para mostrarlo en la celda. El estado del kernel persiste durante el tiempo, con lo que, aunque cada celda sea independiente, las variables declaradas en una celda se pueden utilizar en las demás celdas.
+
+🚀 Recursos de la clase
+https://ellibrodepython.com/python-testing
+
+https://www.atlassian.com/es/git/tutorials/using-branches
+
+https://aprendeconalf.es/docencia/python/ejercicios/pandas/

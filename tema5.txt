@@ -1,0 +1,378 @@
+OOP. Clases
+Ejercicios y dudas clase pasada
+Cuestionario para charlar dudas
+https://forms.gle/P2PszNKFtxBwAdbz8
+
+Código del cuestionario
+https://www.online-python.com/Anz5yDcjZ3
+
+datetime avanzado
+La clase pasada hicimos algunos ejemplos con el modulo datetime. Agrego aqui una serie de ejemplos útiles:
+
+# datetime.now(): para obtener la fecha y hora actuales.
+>>> marca_temporal = datetime.now()
+>>> print(marca_temporal)
+2021-07-22 21:15:45.775099
+>>> marca_temporal.year
+2021
+>>> marca_temporal.hour
+21
+# datetime.date(): obtener la fecha del objeto datetime.
+>>> marca_temporal.date()
+datetime.date(2021, 7, 22)
+# datetime.time(): obtener la hora del objeto datetime. Con este método y el método now() podemos obtener la hora actual.
+>>> marca_temporal.time()
+datetime.time(21, 15, 45, 775099)
+# datetime.replace(): es el método homónimo a los vistos en las clases date y time, cuya función es sustituir valores en un objeto datetime. Para referenciar a los valores que deseamos cambiar hemos de utilizar su nombre en inglés.
+>>> marca_temporal = datetime(2021, 7, 22, 21, 15)
+>>> marca_temporal = marca_temporal.replace(month=8, minute=30)
+>>> marca_temporal
+datetime.datetime(2021, 8, 22, 21, 30)
+# crear una fecha especifica
+>>> fecha = datetime.date(2021, 7, 22)
+>>> fecha.year
+2021
+>>> fecha.month
+7
+>>> fecha.day
+22
+# crear un horario
+>>> hora = datetime.time(21, 15)
+>>> hora.hour
+21
+>>> hora.minute
+15
+>>> hora.second
+0
+>>> hora.microsecond
+0
+>>> hora.isoformat()
+'21:15:00'
+
+
+Formatear fechas y horas
+En esta sección vamos a ver dos métodos especiales de las clases date, time y datetime. Uno para representarlos en una cadena de caracteres (o string) formateado a nuestro gusto, y otro para crear instancias de estos objetos a partir de un string.
+
+Método .strftime()
+La fecha se representa de forma distinta en diferentes países. Por ejemplo en Estados Unidos se usa el formato mes/día/año, mientras que en Europa el formato utilizado es día/mes/año. Lo mismo sucede con las horas, en algunos lugares se usa el formato de 24h y en otros prefieren el formato de 12h. Para ello tenemos el método strftime(), el cual retorna un string con la fecha o hora representada en un formato definido por nosotros mismos.
+
+El siguiente código Python muestra cómo formatear un objeto datetime con el método strftime() a partir de un string que representa nuestro formato deseado. Si quieres saber cómo crear ese string a medida, al final del artículo he añadido una tabla con los códigos que podemos utilizar. Señalar también que estos mismos conceptos son aplicables a los objetos date y time.
+
+>>> x = datetime(2021, 7, 22, 21, 15)
+>>> x = x.strftime("%A, %d of %B %Y at %I:%M %p")
+>>> print(x)
+Thursday, 22 of July 2021 at 09:15 PM
+
+Por defecto, los resultados que obtenemos con el método strftime() son en inglés. Si queremos mostrar los resultados en español tenemos que especificarlo con la librería locale. El siguiente ejemplo muestra cómo hacerlo.
+
+>>> import locale
+>>> locale.setlocale(locale.LC_TIME, "es_ES")
+'es_ES'
+# Una vez completado el paso anterior los resultados ya se muestran en español.
+>>> x = datetime(2021, 7, 22, 21, 15)
+>>> x = x.strftime("%A, %d de %B de %Y a las %I:%M %p")
+>>> print(x)
+jueves, 22 de julio de 2021 a las 09:15
+
+
+Método .strptime()
+Este método hace justo lo contrario que el método strftime(). Es decir, crea un objeto de tipo date, time o datetime a partir de dos strings: uno que representa los valores de fecha y/o tiempo que va a tener el objeto, y otro que especifica el formato del anterior.
+
+>>> x = datetime.strptime("22/07/2021, 21:15", "%d/%m/%Y, %H:%M")
+>>> x
+datetime.datetime(2021, 7, 22, 21, 15)
+
+
+Tabla de códigos de formato
+A continuación te dejo un tabla con los distintos códigos que podemos utilizar para formatear el tiempo con los métodos strftime() y strptime().
+
+Mas info: https://www.programaenpython.com/fundamentos/fechas-y-horas-en-python/
+
+OOP Programación Orientada a Objetos
+Antes de nada, empecemos con una introducción básica a la Programación Orientada a Objetos POO o OOP en inglés. Se trata de un paradigma de programación introducido en los años 1970s, pero que no se hizo popular hasta años más tarde.
+
+Este modo o paradigma de programación nos permite organizar el código de una manera que se asemeja bastante a como pensamos en la vida real, utilizando las famosas clases. Estas nos permiten agrupar un conjunto de variables y funciones que veremos a continuación.
+
+Cosas de lo más cotidianas como un perro o un coche pueden ser representadas con clases. Estas clases tienen diferentes características, que en el caso del perro podrían ser la edad, el nombre o la raza. Llamaremos a estas características, atributos.
+
+Por otro lado, las clases tienen un conjunto de funcionalidades o cosas que pueden hacer. En el caso del perro podría ser andar o ladrar. Llamaremos a estas funcionalidades métodos.
+
+Por último, pueden existir diferentes tipos de perro. Podemos tener uno que se llama Toby o el del vecino que se llama Laika. Llamaremos a estos diferentes tipos de perro objetos. Es decir, el concepto abstracto de perro es la clase, pero Toby o cualquier otro perro particular será el objeto.
+
+La programación orientada a objetos está basada en 6 principios o pilares básicos:
+
+Herencia
+Cohesión
+Abstracción
+Polimorfismo
+Acoplamiento
+Encapsulamiento
+Una vez explicada la programación orientada a objetos puede parecer bastante lógica, pero no es algo que haya existido siempre, y de hecho hay muchos lenguajes de programación que no la soportan.
+
+En parte surgió debido a la creciente complejidad a la que los programadores se iban enfrentando conforme pasaban los años. En el mundo de la programación hay gran cantidad de aplicaciones que realizan tareas muy similares y es importante identificar los patrones que nos permiten no reinventar la rueda. La programación orientada a objetos intentaba resolver esto.
+
+Uno de los primeros mecanismos que se crearon fueron las funciones, que permiten agrupar bloques de código que hacen una tarea específica bajo un nombre. Algo muy útil ya que permite también reusar esos módulos o funciones sin tener que copiar todo el código, tan solo la llamada.
+
+Las funciones resultaron muy útiles, pero no eran capaces de satisfacer todas las necesidades de los programadores. Uno de los problemas de las funciones es que sólo realizan unas operaciones con unos datos de entrada para entregar una salida, pero no les importa demasiado conservar esos datos o mantener algún tipo de estado. Salvo que se devuelva un valor en la llamada a la función o se usen variables globales, todo lo que pasa dentro de la función queda olvidado, y esto en muchos casos es un problema.
+
+Imaginemos que tenemos un juego con naves espaciales moviéndose por la pantalla. Cada nave tendrá una posición (x,y) y otros parámetros como el tipo de nave, su color o tamaño. Sin hacer uso de clases y POO, tendremos que tener una variable para cada dato que queremos almacenar: coordenadas, color, tamaño, tipo. El problema viene si tenemos 10 naves, ya que nos podríamos juntar con un número muy elevado de variables. Todo un desastre.
+
+En el mundo de la programación existen tareas muy similares al ejemplo con las naves, y en respuesta a ello surgió la programación orientada a objetos. Una herramienta perfecta que permite resolver cierto tipo de problemas de una forma mucho más sencilla, con menos código y más organizado. Agrupa bajo una clase un conjunto de variables y funciones, que pueden ser reutilizadas con características particulares creando objetos.
+
+Definiendo clases
+Vista ya la parte teórica, vamos a ver como podemos hacer uso de la programación orientada a objetos en Python. Lo primero es crear una clase, para ello usaremos el ejemplo de perro.
+
+Creando una clase vacía
+class Perro:
+    pass
+
+Se trata de una clase vacía y sin mucha utilidad práctica, pero es la mínima clase que podemos crear. Nótese el uso del pass que no hace realmente nada, pero daría un error si después de los : no tenemos contenido.
+
+Ahora que tenemos la clase, podemos crear un objeto de la misma. Podemos hacerlo como si de una variable normal se tratase. Nombre de la variable igual a la clase con (). Dentro de los paréntesis irían los parámetros de entrada si los hubiera.
+
+# Creamos un objeto de la clase perro
+mi_perro = Perro()
+
+Definiendo atributos
+A continuación vamos a añadir algunos atributos a nuestra clase. Antes de nada es importante distinguir que existen dos tipos de atributos:
+
+Atributos de instancia: Pertenecen a la instancia de la clase o al objeto. Son atributos particulares de cada instancia, en nuestro caso de cada perro. Atributos de clase: Se trata de atributos que pertenecen a la clase, por lo tanto serán comunes para todos los objetos. Empecemos creando un par de atributos de instancia para nuestro perro, el nombre y la raza. Para ello creamos un método init que será llamado automáticamente cuando creemos un objeto. Se trata del constructor.
+
+class Perro:
+    # El método __init__ es llamado al crear el objeto
+    def __init__(self, nombre, raza):
+        print(f"Creando perro {nombre}, {raza}")
+
+        # Atributos de instancia
+        self.nombre = nombre
+        self.raza = raza
+
+
+Ahora que hemos definido el método init con dos parámetros de entrada, podemos crear el objeto pasando el valor de los atributos. Usando type() podemos ver como efectivamente el objeto es de la clase Perro.
+
+mi_perro = Perro("Toby", "Bulldog")
+print(type(mi_perro))
+# Creando perro Toby, Bulldog
+# <class '__main__.Perro'>
+
+Seguramente te hayas fijado en el self que se pasa como parámetro de entrada del método. Es una variable que representa la instancia de la clase, y deberá estar siempre ahí.
+
+El uso de __init__ y el doble __ no es una coincidencia. Cuando veas un método con esa forma, significa que está reservado para un uso especial del lenguaje. En este caso sería lo que se conoce como constructor. Hay gente que llama a estos métodos mágicos.
+
+Por último, podemos acceder a los atributos usando el objeto y .. Por lo tanto.
+
+print(mi_perro.nombre) # Toby
+print(mi_perro.raza)   # Bulldog
+
+Hasta ahora hemos definido atributos de instancia, ya que son atributos que pertenecen a cada perro concreto. Ahora vamos a definir un atributo de clase, que será común para todos los perros. Por ejemplo, la especie de los perros es algo común para todos los objetos Perro.
+
+class Perro:
+    # Atributo de clase
+    especie = 'mamífero'
+
+    # El método __init__ es llamado al crear el objeto
+    def __init__(self, nombre, raza):
+        print(f"Creando perro {nombre}, {raza}")
+
+        # Atributos de instancia
+        self.nombre = nombre
+        self.raza = raza
+
+
+Dado que es un atributo de clase, no es necesario crear un objeto para acceder al atributos. Podemos hacer lo siguiente.
+
+print(Perro.especie)
+# mamífero
+
+Se puede acceder también al atributo de clase desde el objeto.
+
+mi_perro = Perro("Toby", "Bulldog")
+mi_perro.especie
+# 'mamífero'
+
+De esta manera, todos los objetos que se creen de la clase perro compartirán ese atributo de clase, ya que pertenecen a la misma.
+
+Definiendo métodos
+En realidad cuando usamos init anteriormente ya estábamos definiendo un método, solo que uno especial. A continuación vamos a ver como definir métodos que le den alguna funcionalidad interesante a nuestra clase, siguiendo con el ejemplo de perro.
+
+Vamos a codificar dos métodos, ladrar y caminar. El primero no recibirá ningún parámetro y el segundo recibirá el número de pasos que queremos andar. Como hemos indicado anteriormente self hace referencia a la instancia de la clase. Se puede definir un método con def y el nombre, y entre () los parámetros de entrada que recibe, donde siempre tendrá que estar self el primero.
+
+class Perro:
+    # Atributo de clase
+    especie = 'mamífero'
+
+    # El método __init__ es llamado al crear el objeto
+    def __init__(self, nombre, raza):
+        print(f"Creando perro {nombre}, {raza}")
+
+        # Atributos de instancia
+        self.nombre = nombre
+        self.raza = raza
+
+    def ladra(self):
+        print("Guau")
+
+    def camina(self, pasos):
+        print(f"Caminando {pasos} pasos")
+
+
+Por lo tanto si creamos un objeto mi_perro, podremos hacer uso de sus métodos llamándolos con . y el nombre del método. Como si de una función se tratase, pueden recibir y devolver argumentos.
+
+mi_perro = Perro("Toby", "Bulldog")
+mi_perro.ladra()
+mi_perro.camina(10)
+
+# Creando perro Toby, Bulldog
+# Guau
+# Caminando 10 pasos
+
+Herencia en Python
+La herencia es un proceso mediante el cual se puede crear una clase hija que hereda de una clase padre, compartiendo sus métodos y atributos. Además de ello, una clase hija puede sobreescribir los métodos o atributos, o incluso definir unos nuevos.
+
+Se puede crear una clase hija con tan solo pasar como parámetro la clase de la que queremos heredar. En el siguiente ejemplo vemos como se puede usar la herencia en Python, con la clase Perro que hereda de Animal. Así de fácil.
+
+# Definimos una clase padre
+class Animal:
+    pass
+
+# Creamos una clase hija que hereda de la padre
+class Perro(Animal):
+    pass
+
+De hecho podemos ver como efectivamente la clase Perro es la hija de Animal usando bases
+
+print(Perro.__bases__)
+# (<class '__main__.Animal'>,)
+
+De manera similar podemos ver que clases descienden de una en concreto con subclasses.
+
+print(Animal.__subclasses__())
+# [<class '__main__.Perro'>]
+
+¿Y para que queremos la herencia? Dado que una clase hija hereda los atributos y métodos de la padre, nos puede ser muy útil cuando tengamos clases que se parecen entre sí pero tienen ciertas particularidades. En este caso en vez de definir un montón de clases para cada animal, podemos tomar los elementos comunes y crear una clase Animal de la que hereden el resto, respetando por tanto la filosofía DRY. Realizar estas abstracciones y buscar el denominador común para definir una clase de la que hereden las demás, es una tarea de lo más compleja en el mundo de la programación.
+
+Para saber más: El principio DRY (Don't Repeat Yourself) es muy aplicado en el mundo de la programación y consiste en no repetir código de manera innecesaria. Cuanto más código duplicado exista, más difícil será de modificar y más fácil será crear inconsistencias. Las clases y la herencia a no repetir código.
+
+Extendiendo y modificando métodos
+Continuemos con nuestro ejemplo de perros y animales. Vamos a definir una clase padre Animal que tendrá todos los atributos y métodos genéricos que los animales pueden tener. Esta tarea de buscar el denominador común es muy importante en programación. Veamos los atributos:
+
+Tenemos la especie ya que todos los animales pertenecen a una. Y la edad, ya que todo ser vivo nace, crece, se reproduce y muere. Y los métodos o funcionalidades:
+
+Tendremos el método hablar, que cada animal implementará de una forma. Los perros ladran, las abejas zumban y los caballos relinchan. Un método moverse. Unos animales lo harán caminando, otros volando. Y por último un método descríbeme que será común. Definimos la clase padre, con una serie de atributos comunes para todos los animales como hemos indicado.
+
+class Animal:
+    def __init__(self, especie, edad):
+        self.especie = especie
+        self.edad = edad
+
+    # Método genérico pero con implementación particular
+    def hablar(self):
+        # Método vacío
+        pass
+
+    # Método genérico pero con implementación particular
+    def moverse(self):
+        # Método vacío
+        pass
+
+    # Método genérico con la misma implementación
+    def describeme(self):
+        print("Soy un Animal del tipo", type(self).__name__)
+
+
+Tenemos ya por lo tanto una clase genérica Animal, que generaliza las características y funcionalidades que todo animal puede tener. Ahora creamos una clase Perro que hereda del Animal. Como primer ejemplo vamos a crear una clase vacía, para ver como los métodos y atributos son heredados por defecto.
+
+# Perro hereda de Animal
+class Perro(Animal):
+    pass
+
+mi_perro = Perro('mamífero', 10)
+mi_perro.describeme()
+# Soy un Animal del tipo Perro
+
+Con tan solo un par de líneas de código, hemos creado una clase nueva que tiene todo el contenido que la clase padre tiene, pero aquí viene lo que es de verdad interesante. Vamos a crear varios animales concretos y sobreescrbir algunos de los métodos que habían sido definidos en la clase Animal, como el hablar o el moverse, ya que cada animal se comporta de una manera distinta.
+
+Podemos incluso crear nuevos métodos que se añadirán a los ya heredados, como en el caso de la Abeja con picar().
+
+class Perro(Animal):
+    def hablar(self):
+        print("Guau!")
+    def moverse(self):
+        print("Caminando con 4 patas")
+
+class Vaca(Animal):
+    def hablar(self):
+        print("Muuu!")
+    def moverse(self):
+        print("Caminando con 4 patas")
+
+class Abeja(Animal):
+    def hablar(self):
+        print("Bzzzz!")
+    def moverse(self):
+        print("Volando")
+
+    # Nuevo método
+    def picar(self):
+        print("Picar!")
+
+Por lo tanto ya podemos crear nuestros objetos de esos animales y hacer uso de sus métodos que podrían clasificarse en tres:
+
+Heredados directamente de la clase padre: describeme()
+Heredados de la clase padre pero modificados: hablar() y moverse()
+Creados en la clase hija por lo tanto no existentes en la clase padre: picar()
+mi_perro = Perro('mamífero', 10)
+mi_vaca = Vaca('mamífero', 23)
+mi_abeja = Abeja('insecto', 1)
+
+mi_perro.hablar()
+mi_vaca.hablar()
+# Guau!
+# Muuu!
+
+mi_vaca.describeme()
+mi_abeja.describeme()
+# Soy un Animal del tipo Vaca
+# Soy un Animal del tipo Abeja
+
+mi_abeja.picar()
+# Picar!
+
+Uso de super()
+En pocas palabras, la función super() nos permite acceder a los métodos de la clase padre desde una de sus hijas. Volvamos al ejemplo de Animal y Perro.
+
+class Animal:
+    def __init__(self, especie, edad):
+        self.especie = especie
+        self.edad = edad        
+    def hablar(self):
+        pass
+
+    def moverse(self):
+        pass
+
+    def describeme(self):
+        print("Soy un Animal del tipo", type(self).__name__)
+
+
+Tal vez queramos que nuestro Perro tenga un parámetro extra en el constructor, como podría ser el dueño. Para realizar esto tenemos dos alternativas:
+
+Podemos crear un nuevo init y guardar todas las variables una a una. O podemos usar super() para llamar al init de la clase padre que ya aceptaba la especie y edad, y sólo asignar la variable nueva manualmente.
+
+class Perro(Animal):
+    def __init__(self, especie, edad, dueño):
+        # Alternativa 1
+        # self.especie = especie
+        # self.edad = edad
+        # self.dueño = dueño
+
+        # Alternativa 2
+        super().__init__(especie, edad)
+        self.dueño = dueño
+mi_perro = Perro('mamífero', 7, 'Luis')
+mi_perro.especie
+mi_perro.edad
+mi_perro.dueño
+
+🚀 Recursos de la clase
+https://ellibrodepython.com/programacion-orientada-a-objetos-python

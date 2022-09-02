@@ -1,0 +1,245 @@
+Ejercicios y dudas clase pasada
+Herramientas de desarrollo
+IDE
+Es el editor de texto que utilizamos. El mas reconocido en Python es Pycharm.
+
+Que son las Exceptions?
+El programa aca descripto tenía un error, no estaba teniendo en cuenta el tipo de dato que obteníamos del usuario, podía ser una cadena, podía ser un numero negativo, y en ese caso, la salida era incorrecta o obteníamos una Exception.
+
+Los errores en tiempo de ejecución se denominan excepciones, incluso si la declaración o expresión es sintácticamente correcta, puede generar un error cuando se intenta ejecutarla. La última línea de los mensajes de error indica qué sucedió. La cadena mostrada como tipo de la excepción es el nombre de la excepción predefinida que ocurrió. El resto de la línea provee un detalle basado en el tipo de la excepción y qué la causó.
+
+¿Cuál es la diferencia entre un error de sintaxis y un excepción?
+Pues un error de sintaxis es un uso incorrecto del lenguaje, es decir, expresar de forma incorrecta una estructura. En cambio, una excepción se produce cuando el programa se esta ejecutando. Por ejemplo si pedimos por teclado un número entero y realizamos una operación sin convertir la cadena recibida en un número se producirá una excepción. En Python, al igual que otros lenguajes como Java es posible controlar excepciones, para que el programa este preparado y ejecute unas instrucciones concretas cuando se produzcan excepciones. (clase 3 o 4)
+
+Operadores de concatenación
+Cuando queremos sumar usamos +, sirve no solo para numeros, sino para str.
+
+Comparaciones y valores verdad
+==
+>
+>=
+
+Operadores lógicos
+and
+or
+not
+
+Sumando variables en Python
+Vamos a sumar dos variables e imprimir su valor. Lo primero vamos a declararlas, con nombres a y b. Recordemos que declarar una variable significa “crearla”.
+
+a = 3
+b = 7
+
+Ahora Python ya conoce a y b y sus respectivos valores. Podemos hacer uso de + para sumarlos, y una vez más de print() para mostrar su valor por pantalla.
+
+print(a+b)
+
+Es importante que sólo usemos variables que hayan sido definidas, porque de lo contrario tendremos un error. Si hacemos:
+
+Condicionales
+Podemos empezar a complicar un poco más las cosas con el uso de una sentencia condicional. El siguiente código hace uso del if para comprobar si la a es igual == a 10. Si lo es, se imprimirá “Es 10” y si no lo es “No es 10”. Es importante el uso de ==, que es el operador relacional que vimos antes.
+
+a = 10
+if a == 10:
+    print("Es 10")
+else:
+    print("No es 10")
+
+Identación y bloques de código
+En Python los bloques de código se representan con identación, y aunque hay un poco de debate con respecto a usar tabulador o espacios, la norma general es usar cuatro espacios.
+
+En el siguiente código tenemos un condicional if. Justo después tenemos un print() identado con cuatro espacios. Por lo tanto, todo lo que tenga esa identación pertenecerá al bloque del if.
+
+if True:
+    print("True")
+
+Esto es muy importante ya que el código anterior y el siguiente no son lo mismo. De hecho el siguiente código daría un error ya que el if no contiene ningún bloque de código, y eso es algo que no se puede hacer en Python.
+
+if True:
+print("True")
+
+Por otro lado, a diferencia de en otros lenguajes de programación, no es necesario utilizar ; para terminar cada línea.
+
+x = 10;
+
+Sin embargo en Python no es necesario, basta con un salto de línea.
+
+x = 5
+y = 10
+
+Pero se puede usar el punto y coma ; para tener dos sentencias en la misma línea.
+
+x = 5; y = 10
+
+Cadenas
+De la misma forma que hemos visto que una variable puede almacenar un valor entero como 10, es posible también almacenar otros tipos como decimales o incluso cadenas de texto.
+
+Si queremos almacenar un valor decimal, basta con indicarlo usando la separación con . valor_decimal = 10.3234 Y si queremos almacenar una cadena, es necesario indicar su contenido entre comillas simples 'o dobles ". mi_cadena = "Hola Mundo"
+
+Como vimos, podemos sumar numeros, pero también podemos sumar (concatenar) cadenas (o strings, recordar que es lo mismo)
+
+nombre = 'maria'
+saludo = 'hola ' + nombre
+print(saludo)
+
+Bucle for
+Anteriormente hemos visto otras estructuras de control como el if o el while. A continuación explicaremos el for y sus particularidades en Python, que comparado con otros lenguajes de comparación, tiene ciertas diferencias.
+
+El for es un tipo de bucle, parecido al while pero con ciertas diferencias. La principal diferencia es que el número de iteraciones de un for esta definido de antemano, mientras que en un while no. La diferencia principal con respecto al while es en la condición. Mientras que en el while la condición era evaluada en cada iteración para decidir si volver a ejecutar o no el código, en el for no existe tal condición, sino un iterable que define las veces que se ejecutará el código. En el siguiente ejemplo vemos un bucle for que se ejecuta 5 veces, y donde la i incrementa su valor “automáticamente” en 1 en cada iteración.
+
+for i in range(0, 5):
+    print(i)
+
+Salida:
+
+0
+1
+2
+3
+4
+
+Si has programado antes con while, tal vez ya empieces a ver ventajas en el uso del for. Si por ejemplo, queremos tener un número que va creciendo de 0 a n, hacerlo con for nos ahorra alguna línea de código, porque no tenemos que escribir código para incrementar el número.
+
+En Python se puede iterar prácticamente todo, como por ejemplo una cadena. En el siguiente ejemplo vemos como la i va tomando los valores de cada letra. Mas adelante explicaremos que es esto de los iterables e iteradores.
+
+for i in "Python":
+    print(i)
+
+Iterables e iteradores
+Para entender al cien por cien los bucles for, y como Python fue diseñado como lenguaje de programación, es muy importante entender los conceptos de iterables e iteradores. Empecemos con un par de definiciones:
+
+Los iterables son aquellos objetos que como su nombre indica pueden ser iterados, lo que dicho de otra forma es, que puedan ser indexados. Si piensas en un array (o una list en Python), podemos indexarlo con lista[1] por ejemplo, por lo que sería un iterable. Los iteradores son objetos que hacen referencia a un elemento, y que tienen un método next que permite hacer referencia al siguiente. Para saber más: Si quieres saber más sobre los iteradores te dejamos este enlace a la documentación oficial.
+
+Ambos son conceptos un tanto abstractos y que pueden ser complicados de entender. Veamos unos ejemplos. Como hemos comentado, los iterables son objetos que pueden ser iterados o accedidos con un índice. Algunos ejemplos de iterables en Python son las listas, tuplas, cadenas o diccionarios. Sabiendo esto, lo primero que tenemos que tener claro es que en un for, lo que va después del in deberá ser siempre un iterable.
+
+#for <variable> in <iterable>:
+#    <Código>
+
+Tiene bastante sentido, porque si queremos iterar una variable, esta variable debe ser iterable, todo muy lógico. Pero llegados a este punto, tal vez de preguntes ¿pero cómo se yo si algo es iterable o no?. Bien fácil, con la siguiente función isinstance() podemos saberlo. No te preocupes si no entiendes muy bien lo que estamos haciendo, fíjate solo en el resultado, True significa que es iterable y False que no lo es.
+
+from collections import Iterable
+lista = [1, 2, 3, 4]
+cadena = "Python"
+numero = 10
+print(isinstance(lista, Iterable))  #True
+print(isinstance(cadena, Iterable)) #True
+print(isinstance(numero, Iterable)) #False
+
+Por lo tanto las listas y las cadenas son iterables, pero numero, que es un entero no lo es. Es por eso por lo que no podemos hacer lo siguiente, ya que daría un error. De hecho el error sería TypeError: int' object is not iterable.
+
+numero = 10
+for i in numero:
+    print(i)
+
+Una vez entendidos los iterables, veamos los iteradores. Para entender los iteradores, es importante conocer la función iter() en Python. Dicha función puede ser llamada sobre un objeto que sea iterable, y nos devolverá un iterador como se ve en el siguiente ejemplo.
+
+lista = [5, 6, 3, 2]
+it = iter(lista)
+print(it)       #<list_iterator object at 0x106243828>
+print(type(it)) #<class 'list_iterator'>
+
+
+Vemos que al imprimir it es un iterador, de la clase list_iterator. Esta variable iteradora, hace referencia a la lista original y nos permite acceder a sus elementos con la función next(). Cada vez que llamamos a next() sobre it, nos devuelve el siguiente elemento de la lista original. Por lo tanto, si queremos acceder al elemento 4, tendremos que llamar 4 veces a next(). Nótese que el iterador empieza apuntando fuera de la lista, y no hace referencia al primer elemento hasta que no se llama a next() por primera vez.
+
+lista = [5, 6, 3, 2]
+it = iter(lista)
+print(next(it))
+#     [5, 6, 3, 2]
+#      ^
+#      |
+#     it
+print(next(it))
+#     [5, 6, 3, 2]
+#         ^
+#         |
+#        it
+print(next(it))
+#     [5, 6, 3, 2]
+#            ^
+#            |
+#           it
+
+Para saber mas: Existen otros iteradores para diferentes clases:
+
+str_iterator para cadenas
+list_iterator para sets.
+tuple_iterator para tuplas.
+set_iterator para sets.
+dict_keyiterator para diccionarios.
+Dado que el iterador hace referencia a nuestra lista, si llamamos más veces a next() que la longitud de la lista, se nos devolverá un error StopIteration. Lamentablemente no existe ninguna opción de volver al elemento anterior.
+
+lista = [5, 6]
+it = iter(lista)
+print(next(it))
+print(next(it))
+#print(next(it)) # Error! StopIteration
+
+Es perfectamente posible tener diferentes iteradores para la misma lista, y serán totalmente independientes. Tan solo dependerán de la lista, como es evidente, pero no entre ellos.
+
+lista = [5, 6, 7]
+it1 = iter(lista)
+it2 = iter(lista)
+print(next(it1)) #5
+print(next(it1)) #6
+print(next(it1)) #7
+print(next(it2)) #5
+
+For anidados
+Es posible anidar los for, es decir, meter uno dentro de otro. Esto puede ser muy útil si queremos iterar algún objeto que en cada elemento, tiene a su vez otra clase iterable. Podemos tener por ejemplo, una lista de listas, una especie de matriz.
+
+lista = [[56, 34, 1], [12, 4, 5], [9, 4, 3]] Si iteramos usando sólo un for, estaremos realmente accediendo a la segunda lista, pero no a los elementos individuales.
+
+for i in lista:
+    print(i)
+#[56, 34, 1]
+#[12, 4, 5]
+#[9, 4, 3]
+
+Si queremos acceder a cada elemento individualmente, podemos anidar dos for. Uno de ellos se encargará de iterar las columnas y el otro las filas.
+
+for i in lista:
+    for j in i:
+        print(j)
+# Salida: 56,34,1,12,4,5,9,4,3
+
+Ejemplos for
+Iterando cadena al revés. Haciendo uso de [::-1] se puede iterar la lista desde el último al primer elemento.
+
+texto = "Python"
+for i in texto[::-1]:
+    print(i) #n,o,h,t,y,P
+
+Itera la cadena saltándose elementos. Con [::2] vamos tomando un elemento si y otro no.
+
+texto = "Python"
+for i in texto[::2]:
+    print(i) #P,t,o
+
+While
+Anteriormente hemos visto el uso del if y el for para modificar el flujo de ejecución del código. A continuación vemos otra forma de hacerlo con el while.
+
+El uso del while nos permite ejecutar una sección de código repetidas veces, de ahí su nombre. El código se ejecutará mientras una condición determinada se cumpla. Cuando se deje de cumplir, se saldrá del bucle y se continuará la ejecución normal. Llamaremos iteración a una ejecución completa del bloque de código.
+
+Cabe destacar que existe dos tipos de bucles, los que tienen un número de iteraciones no definidas, y los que tienen un número de iteraciones definidas. El while estaría dentro del primer tipo. Antes vimo los for, que se engloban en el segundo.
+
+x = 5
+while x > 0:
+    x -=1
+    print(x)
+# Salida: 4,3,2,1,0
+
+En el ejemplo anterior tenemos un caso sencillo de while. Tenemos una condición x>0 y un bloque de código a ejecutar mientras dure esa condición x-=1 y print(x). Por lo tanto mientras que x sea mayor que 0, se ejecutará el código. Una vez se llega al final, se vuelve a empezar y si la condición se cumple, se ejecuta otra vez. En este caso se entra al bloque de código 5 veces, hasta que en la sexta, x vale cero y por lo tanto la condición ya no se cumple. Por lo tanto el while tiene dos partes:
+
+La condición que se tiene que cumplir para que se ejecute el código. El bloque de código que se ejecutará mientras la condición se cumpla. Ten cuidado ya que un mal uso del while puede dar lugar a bucles infinitos y problemas. Cierto es que en algún caso tal vez nos interese tener un bucle infinito, pero salvo que estemos seguros de lo que estamos haciendo, hay que tener cuidado. Imaginemos que tenemos un bucle cuya condición siempre se cumple. Por ejemplo, si ponemos True en la condición del while, siempre que se evalúe esa expresión, el resultado será True y se ejecutará el bloque de código. Una vez llegado al final del bloque, se volverá a evaluar la condición, se cumplirá, y vuelta a empezar. No te recomiendo que ejecutes el siguiente código, pero puedes intentarlo.
+
+Else y while
+Algo no muy corriente en otros lenguajes de programación pero si en Python, es el uso de la cláusula else al final del while. Podemos ver el ejemplo anterior mezclado con el else. La sección de código que se encuentra dentro del else, se ejecutará cuando el bucle termine, pero solo si lo hace “por razones naturales”. Es decir, si el bucle termina porque la condición se deja de cumplir, y no porque se ha hecho uso del break.
+
+x = 5
+while x > 0:
+    x -=1
+    print(x) #4,3,2,1,0
+else:
+    print("El bucle ha finalizado")
+
+Podemos ver como si el bucle termina por el break, el print() no se ejecutará. Por lo tanto, se podría decir que si no hay realmente ninguna sentencia break dentro del bucle, tal vez no tenga mucho sentido el uso del else, ya que un bloque de código fuera del bucle cumplirá con la misma funcionalidad.

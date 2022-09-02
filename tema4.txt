@@ -1,0 +1,385 @@
+Ciclos avanzado. None. Virtualenv. Ejecución de scripts. Modulos, Modulo datetime.
+Repaso: Diferencias entre listas y diccionarios
+Como sucede con un diccionario convencional, un diccionario en Python es una palabra que tiene asociado algo. Al contrario de lo que sucedía en las listas, los diccionarios no tienen orden. El índice de la lista debe ser un número entero y el índice del diccionario puede ser casi de cualquier tipo.
+
+Conjuntos
+Aunque se usan con menos frecuencia, python también dispone de conjuntos (sets).
+
+La mayor facilidad que nos dan los conjuntos son las operaciones:
+
+A | B: Unión entre el conjunto A y B (Los elementos del conjunta A y los elementos del conjunto B)
+A & B: Intersección entre el conjunto A y B (los elementos que están en ambos conjuntos)
+A – B: Diferencia entre el conjunto A y B (los elementos que están en A pero no están en B)
+A ^B: Diferencia simétrica entre el conjunto A y B (los elementos que están en A o en B pero no en los dos)
+Veamos el ejemplo:
+
+>>> set([1,1,1,2,2,3,4,6])
+{1, 2, 3, 4, 6}
+>>> set([1,1,1,2,2,3,4,6]) - set([1,2])
+{3, 4, 6}
+>>> set([1,1,1,2,2,3,4,6]) | set([1,2])
+{1, 2, 3, 4, 6}
+
+Ciclos avanzado
+break
+La sentencia break nos permite alterar el comportamiento de los bucles while y for. Concretamente, permite terminar con la ejecución del bucle. Esto significa que una vez se encuentra la palabra break, el bucle se habrá terminado.
+
+Break con bucles for
+Veamos como podemos usar el break con bucles for. El range(5) generaría 5 iteraciones, donde la i valdría de 0 a 4. Sin embargo, en la primera iteración, terminamos el bucle prematuramente.
+
+En este ejemplo el ciclo se termina despues de la primera iteracion:
+
+for i in range(5):
+    print(i)
+    break
+    # No llega
+
+Un ejemplo un poco más útil, sería el de buscar una letra en una palabra. Se itera toda la palabra y en el momento en el que se encuentra la letra que buscábamos, se rompe el bucle y se sale. Esto es algo muy útil porque si ya encontramos lo que estábamos buscando, no tendría mucho sentido seguir iterando la lista, ya que desperdiciaríamos recursos.
+
+cadena = 'Python'
+for letra in cadena:
+    if letra == 'h':
+        print("Se encontró la h")
+        break
+    print(letra)
+
+# Salida:
+# P
+# y
+# t
+# Se encontró la h
+
+Break con bucles while
+El break también nos permite alterar el comportamiento del while. Veamos un ejemplo.
+
+La condición while True haría que la sección de código se ejecutara indefinidamente, pero al hacer uso del break, el bucle se romperá cuando x valga cero.
+
+x = 5
+while True:
+    x -= 1
+    print(x)
+    if x == 0:
+        break
+    print("Fin del bucle")
+
+#4, 3, 2, 1, 0
+
+Por norma general, y salvo casos muy concretos, si ves un while True, es probable que haya un break dentro del bucle.
+
+Break y bucles anidados
+Como hemos dicho, el uso de break rompe el bucle, pero sólo aquel en el que está dentro.
+
+Es decir, si tenemos dos bucles anidados, el break romperá el bucle anidado, pero no el exterior.
+
+for i in range(0, 4):
+    for j in range(0, 4):
+        break
+        #Nunca se realiza más de una iteración
+    # El break no afecta a este for
+    print(i, j)
+
+# 0 0
+# 1 0
+# 2 0
+# 3 0
+
+continue
+El uso de continue al igual que el ya visto break, nos permite modificar el comportamiento de de los bucles while y for. Concretamente, continue se salta todo el código restante en la iteración actual y vuelve al principio en el caso de que aún queden iteraciones por completar. La diferencia entre el break y continue es que el continue no rompe el bucle, si no que pasa a la siguiente iteración saltando el código pendiente.
+
+En el siguiente ejemplo vemos como al encontrar la letra P se llama al continue, lo que hace que se salte el print(). Es por ello por lo que no vemos la letra P impresa en pantalla.
+
+cadena = 'Python'
+for letra in cadena:
+    if letra == 'P':
+        continue
+    print(letra)
+# Salida:
+# y
+# t
+# h
+# o
+# n
+
+A diferencia del break, el continue no rompe el bucle sino que finaliza la iteración actual, haciendo que todo el código que va después se salte, y se vuelva al principio a evaluar la condición.
+
+En el siguiente ejemplo podemos ver como cuando la x vale 3, se llama al continue, lo que hace que se salte el resto de código de la iteración (el print()). Por ello, vemos como el número 3 no se imprime en pantalla.
+
+x = 5
+while x > 0:
+    x -= 1
+    if x == 3:
+        continue
+    print(x)
+
+#Salida: 4, 2, 1, 0
+
+Iterar con zip
+La función zip() de Python viene incluida por defecto en el namespace, lo que significa que puede ser usada sin tener que importarse. De acuerdo con la documentación oficial:
+
+Returns an iterator of tuples, where the i-th tuple contains the i-th element from each of the argument sequences or iterables. The iterator stops when the shortest input iterable is exhausted.
+
+Dicho de otra manera, si pasamos dos listas a zip como entrada, el resultado será una tupla donde cada elemento tendrá todos y cada uno de los elementos i-ésimos de las pasadas como entrada.
+
+Veamos un ejemplo. Como podemos ver, el resultado tras aplicar zip es una lista con a[0]b[0] en el primer elemento y a[1]b[1] como segundo.
+
+a = [1, 2]
+b = ["Uno", "Dos"]
+c = zip(a, b)
+
+print(list(c))
+# [(1, 'Uno'), (2, 'Dos')]
+
+A priori puede parecer una función no muy relevante, pero es realmente útil combinada con un for para iterar dos listas en paralelo.
+
+a = [1, 2]
+b = ["Uno", "Dos"]
+c = zip(a, b)
+
+for numero, texto in zip(a, b):
+    print("Número", numero, "Letra", texto)
+    
+# Número 1 Letra Uno
+# Número 2 Letra Dos
+
+zip() con n argumentos
+Ya hemos visto el uso de zip con dos listas, pero dado que está definida como zip(iterables), es posible pasar un número arbitrario de iterables como entrada.
+
+Veamos un ejemplo con varias listas. Es importante notar que todas tienen la misma longitud, dos.
+
+numeros = [1, 2]
+espanol = ["Uno", "Dos"]
+ingles = ["One", "Two"]
+frances = ["Un", "Deux"]
+c = zip(numeros, espanol, ingles, frances)
+
+for n, e, i, f in zip(numeros, espanol, ingles, frances):
+    print(n, e, i, f)
+    
+# 1 Uno One Un
+# 2 Dos Two Deux
+
+
+También podemos usar zip usando iterables de diferentes longitudes. En este caso lo que pasará es que el iterador para cuando la lista más pequeña se acaba.
+
+numeros = [1, 2, 3, 4, 5]
+espanol = ["Uno", "Dos"]
+
+for n, e in zip(numeros, espanol):
+    print(n, e)
+
+# 1 Uno
+# 2 Dos
+
+Resulta lógico que este sea el comportamiento, porque de no ser así y se continuara, no tendríamos valores para usar.
+
+Iterar con enumerate
+El uso del for en Python nos permite iterar colecciones, recorriendo todos los elementos de la misma.
+
+lista = ["A", "B", "C"]
+
+for l in lista:
+    print(l)
+
+# Salida:
+# A
+# B
+# C
+
+Sin embargo, existen situaciones en las que no solo queremos acceder al elemento i-ésimo de la colección, sino que además queremos el índice. Una forma de hacerlo sería la siguiente.
+
+lista = ["A", "B", "C"]
+
+indice = 0
+for l in lista:
+    print(indice, l)
+    indice += 1
+
+# Salida:
+# 0 A
+# 1 B
+# 2 C
+
+Aunque se trata de una forma perfectamente válida, no es demasiado pythónica, y es precisamente donde entra en juego el enumerate(). Su uso nos permite ahorrar alguna que otra línea de código, obteniendo un resultado mucho más limpio y claro.
+
+lista = ["A", "B", "C"]
+
+for indice, l in enumerate(lista):
+    print(indice, l)
+
+# Salida:
+# 0 A
+# 1 B
+# 2 C
+
+Por último, es importante notar que su uso no se limita únicamente a bucles for. Podemos convertir el tipo enumerate en una lista de tuplas, donde cada una contiene un elemento de la colección inicial y el índice asociado.
+
+lista = ["A", "B", "C"]
+
+en = list(enumerate(lista))
+print(en)
+
+# Salida;
+# [(0, 'A'), (1, 'B'), (2, 'C')]
+
+Por lo tanto recuerda, la próxima vez que quieras acceder a los índices de una colección, piensa si tal vez enumerate puede resolver tu problema de manera más clara y con menos código.
+
+None
+El objeto None de Python, denota falta de valor. Este objeto no tiene métodos.
+
+Ya sabemos que Python es un lenguaje de «tipado» dinámico, es decir, no es necesario inidicar de qué tipo de dato es una variable al momento de crearla ni tampoco que la misma mantenga ese tipo de dato a lo largo de la ejecución del programa: puede comenzar siendo un entero, luego una cadena, luego un número de coma flotante, etc. No obstante, todas las variables tienen algún tipo de dato (para ser más precisos, en realidad, son instancias de alguna clase; pero esto no nos interesa todavia) que podemos conocer vía la función incorporada type():
+
+>>> pi = 3.14
+>>> type(pi)
+<class 'float'>
+
+Los cuatro tipos de dato básicos son el número entero (int), el número de coma flotante (float), la cadena de caracteres (str) y el booleano (bool). Sin embargo, Python incorpora un quinto tipo de dato que estrictamente hablando se llama NoneType y cuyo único valor posible es None (pronunciado llanamente «nan»).
+
+>>> a = None
+>>> type(a)
+<class 'NoneType'>
+
+A menudo None es utilizado cuando se quiere crear una variable (puesto que Python no distingue la creación de la asignación: crear una variable es simplemente darle un valor) pero aún no se le quiere asignar ningún valor en particular.
+
+Una variable puede empezar siendo None y luego ser asignada con otro valor.
+
+>>> a = None
+>>> type(a)
+<class 'NoneType'>
+>>> a = "Hola mundo"
+>>> type(a)
+<class 'str'>
+
+Nótese que cuando escribimos el nombre de una variable en la consola interactiva cuyo contenido es None, no se mostrará nada.
+
+>>> a = None
+>>> a
+>>>
+
+Dado que se trata de un tipo de dato como cualquier otro, con la peculiaridad de que tiene un único valor posible, podemos realizar las comparaciones habituales.
+
+a = None
+if a == None:
+    print("a es None.")
+else:
+    print("a no es None.")
+
+Si bien esto es válido, la forma recomendada de hacer comparaciones con este tipo de dato es utilizando la palabra reservada is (véase más abajo la explicación técnica de esto).
+
+variable_a = None
+# Método recomendado de comparación.
+if variable_a is None:
+    print("a es None.")
+else:
+    print("a no es None.")
+# o en caso de querer validar que NO sea None
+variable_a = 1
+variable_b = 2
+# Válido.
+if not variable_a is None:
+    print("a no es None.")
+# Válido y más legible.
+if variable_n is not None:
+    print("b no es None.")
+
+Las dos comparaciones son similares, pero la segunda es la más recomendada.
+
+Ambiente virtual (virtualenv)
+Nos permite encapsular un proyecto para poder instalar las versiones de los paquetes que se requieran sin tenerlos que instalar en todo el sistema operativo. Esto evita conflictos de paquetes en el intérprete principal.
+
+Scripts
+En informática, un script, secuencia de comandos o guion (traduciendo desde inglés) es un término informal que se usa para designar a un programa relativamente simple. En nuestro caso, para resolver los ejercicios integradores 1, vamos a tener que escribir distintos scripts o programitas.
+
+Ejemplo script simple en Python
+mi_primer_script.py
+
+def multiply(numero_a, numero_b):
+    return float(numero_a) * float(numero_b)
+
+
+def main():
+    # Aqui inicia el programa
+    numero_a = input('Inserte un número: ')
+    numero_b = input('Inserte otro número: ')
+    res = multiply(numero_a, numero_b)
+    print(f'La multiplicación es {res}')
+    # Aqui finaliza el programa
+
+if __name__ == '__main__':
+    main()
+
+Prestar atención a __main__ que indica el comienzo del programa: La función main() desempeña un doble papel: cuando elaboramos un programa, un script con varias funciones def en su interior, a veces se hace necesario proporcionar un ORDEN DE JERARQUÍA al intérprete de Python para que éste sepa por qué función debe comenzar a ejecutarse nuestro script.
+
+Módulos: from, import
+El uso de from e import nos permite importar módulos o librerías, tanto estándar de Python como externas o definidas por nosotros. En ejemplos como este es donde podemos ver que la sintaxis de Python se asemeja bastante al lenguaje natural: de collections importa namedtuple.
+
+from collections import namedtuple
+
+Un módulo nos permitirá organizar lógicamente el código Python. Agrupando código relacionado dentro de un módulo hace el código mas fácil de entender y usar. Un módulo es un objeto de Python con atributos con nombres arbitrarios que puede enlazar y hacer referencia.
+
+Simplemente, un módulo es no es otra cosa sino un archivo con extensión .py. Un módulo puede definir funciones, clases y variables, también puede incluir código ejecutable.
+
+A continuación un ejemplo de un simple módulo llamado utilidades.py:
+
+""" Módulo para cálculos diversos """
+
+def precio_con_descuento(precio_original, descuento):
+    """Calcula y retorna el precio con descuento."""
+    nuevo_precio = (100 - descuento) * precio_original / 100
+    return nuevo_precio
+
+def suma_lista(lista_de_numeros):
+    resultado = 0
+    for numero in lista_de_numeros:
+        resultado += numero
+    return resultado
+
+
+
+Sentencia import
+La sentencia import se utiliza para importar un módulo. Usted puede usar cualquier archivo de código Python como un módulo ejecutando esta sentencia en otro archivo de código Python. La sentencia import tiene la siguiente sintaxis:
+
+import os
+
+Cuando el interprete encuentra una sentencia import, este importa el módulo si el mismo esta presente en la ruta de búsqueda. Una ruta de búsqueda es una lista de directorios que el interprete busca antes de importar un módulo.
+
+Por ejemplo, al importar el módulo utilidades.py, usted necesita colocar la siguiente sentencia al tope del otro script Python. A continuación un ejemplo de un simple módulo, calculo_factura.py (tener en cuenta que debemos estar en el mismo directorio que el modulo utilidades.py)
+
+# Importar el modulo llamado "utilidades"
+import utilidades
+
+
+print(f"El precio de una heladera de 15000 con 30\% de descuento es {utilidades.precio_con_descuento(15000, 30)}")
+print(f"El total del carrito es {utilidades.suma_lista([456,222,12])}")
+
+
+
+La primera vez que un módulo es importado en un script de Python, se ejecuta su código una vez. Si otro módulo importa el mismo módulo este no se cargará nuevamente; los módulos son inicializados una sola vez.
+
+Modulo datetime
+https://docs.python.org/es/3/library/datetime.html
+
+Existe un modulo de Python que nos permite trabajar con fechas y días. Para utilizarlo necesitamos importarlo:
+
+import datetime
+
+El módulo datetime proporciona clases para manipular fechas y horas. Si bien la implementación permite operaciones aritméticas con fechas y horas, su principal objetivo es poder extraer campos de forma eficiente para su posterior manipulación o formateo.
+
+Ejemplos:
+
+ayer = datetime.date(2021, 11, 1)
+ayer.replace(day=26)
+hoy = datetime.date.today()
+
+Fechas futuras y pasadas pueden calcularse usando aritmética básica en dos objetos datetime, o combinando datetime con un timedelta. Restar fechas produce un timedelta, y un timedelta se puede agregar o restar de una fecha para producir otra fecha. Los valores internos para un timedelta son almacenados en días, segundos y microsegundos.
+
+from datetime import date
+today = date.today()
+my_birthday = date(today.year, 7, 3)
+time_to_birthday = my_birthday - today
+time_to_birthday.days  # El resultado es un tipo de dato timedelta
+
+
+Para leer mas de aritmética de fechas pueden ir a https://rico-schmidt.name/pymotw-3/datetime/index.html
+
+🚀 Recursos de la clase
+https://ellibrodepython.com/modulos-python https://j2logo.com/python/tutorial/tipo-set-python/ https://openlibra.com/es/book/download/introduccion-a-la-programacion-con-python-2 https://www.freecodecamp.org/espanol/news/python-if-name-main/ https://elpythonista.com/script-en-python

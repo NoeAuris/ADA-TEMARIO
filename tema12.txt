@@ -1,0 +1,61 @@
+Servidor Web - Explicacion TP
+Ejercicios y dudas clase pasada
+https://forms.gle/TD98igY7YAbxVzkX9
+
+Servidor
+Hemos armado un servidor web propio, con Flask en Python, pero, volvamos a la teoría para entender qué estamos creando:
+
+¿Qué es un servidor web?
+Los servidores web sirven para almacenar contenidos de Internet y facilitar su disponibilidad de forma constante y segura. Cuando visitas una página web desde tu navegador, es en realidad un servidor web el que envía los componentes individuales de dicha página directamente a tu ordenador. Esto quiere decir que para que una página web sea accesible en cualquier momento, el servidor web debe estar permanentemente online.
+
+En nuestro trabajo, tenemos levantado un servidor en Python. Dicho servidor escucha peticiones del navegador en el puerto 5000 (porque es el puerto por defecto de Flask).
+
+Servidor Web
+
+Qué es 127.0.0.1?
+Para definir el término «localhost» se comienza explicando que se refiere al propio ordenador que se tiene enfrente. Traducido literalmente al castellano, localhost es “huésped local”, pero en la práctica se utiliza para referirse al dispositivo o al servidor local. Así, cuando se llama al host local, el equipo habla, por así decirlo, consigo mismo o con un servidor instalado en él. No obstante, esta definición se queda corta, pues con localhost no se hace referencia de forma directa al propio PC, sino a su dirección IP. Cada ordenador suele tener una dirección IP que le identifica dentro de la red y otra con la cual el usuario navega en Internet, casi siempre dinámica y por normal general asignada por el proveedor de Internet. La dirección asociada al localhost, también llamada dirección IP de loopback, es especial e invariable y, si se utiliza un servidor en el propio equipo, sirve para acceder a él sin necesidad de salir a Internet.
+
+Esto significa que el término encuentra aplicación en el contexto de las redes. En este marco, el localhost no denomina solamente al servidor virtual, sino también a su nombre de dominio. Como .test, .example, o .invalid; .localhost es un dominio de nivel superior, reservado para propósitos de documentación y comprobación. Si se accede al dominio, se activa un bucle reverso o loopback, de modo que si se introduce en el navegador la dirección localhost, la petición no se envía a Internet a través del router, sino que permanece en el sistema. El localhost tiene la dirección IP 127.0.0.1, la cual hace referencia al servidor en el propio equipo.
+
+Localhost para realizar pruebas
+El localhost se utiliza principalmente en el ámbito de los servidores web y en la programación de aplicaciones que tienen que comunicarse a través de Internet. Durante el proceso de desarrollo de una aplicación es muy importante comprobar si esta funciona tal como se había planteado una vez se accede a Internet. Pero hay funciones que solo se pueden ejecutar cuando sus archivos se encuentran en el servidor local. Existe una gran diferencia si, por ejemplo, se abre un documento HTML directamente en el ordenador o si se carga en un servidor antes de acceder a él. Lo que carece de sentido es publicar un producto sin terminar. Por este motivo, los desarrolladores usan un loopback que les permite simular una conexión evitando la Red: la conexión permanece completamente en el sistema.
+
+HTTP
+En las versiones del protocolo HTTP/1.1 y anteriores los mensajes eran de formato texto y eran totalmente comprensibles directamente por una persona. En HTTP/2, los mensajes estan estructurados en un nuevo formato binario y las tramas permiten la compresión de las cabeceras y su multiplexación. Así pues, incluso si solamente parte del mensaje original en HTTP se envía en este formato, la sematica de cada mensaje es la misma y el cliente puede formar el mensaje original en HTTP/1.1. Luego, es posible interpretar los mensajes HTTP/2 en el formato de HTTP/1.1.
+
+Existen dos tipos de mensajes HTTP: peticiones y respuestas, cada uno sigue su propio formato.
+
+Peticiones (GET, POST, ...)
+
+
+Una petición de HTTP, está formado por los siguientes campos:
+
+Un método HTTP, normalmente pueden ser un verbo, como: GET, POST o un nombre como: OPTIONS (en-US) o HEAD (en-US), que defina la operación que el cliente quiera realizar.
+
+El objetivo de un cliente, suele ser una petición de recursos, usando GET, o presentar un valor de un formulario HTML, usando POST, aunque en otras ocasiones puede hacer otros tipos de peticiones.
+
+La dirección del recurso pedido; la URL del recurso, sin los elementos obvios por el contexto, como pueden ser: sin el protocolo (http://), el dominio (aquí developer.mozilla.org), o el puerto TCP (aquí el 80 o 5000 en nuestro caso).
+
+La versión del protocolo HTTP.
+
+Cabeceras HTTP opcionales, que pueden aportar información adicional a los servidores. O un cuerpo de mensaje, en algún método, como puede ser POST, en el cual envía la información para el servidor.
+
+Respuestas
+Un ejemplo de repuesta:
+
+Las respuestas están formadas por los siguentes campos:
+
+La versión del protocolo HTTP que están usando.
+
+Un código de estado, indicando si la petición ha sido exitosa, o no, y debido a que.
+
+Un mensaje de estado, una breve descripción del código de estado.
+
+Cabeceras HTTP, como las de las peticiones.
+
+Opcionalmente, el recurso que se ha pedido.
+
+🚀 Recursos de la clase
+https://developer.mozilla.org/es/docs/Web/HTTP/Overview
+
+https://www.techwithtim.net/tutorials/flask/adding-bootstrap/

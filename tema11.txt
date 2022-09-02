@@ -1,0 +1,316 @@
+PEP8 - Practica - Trabajo Final
+Ejercicios y dudas clase pasada
+PEP8
+Ya estamos programando en Python, ahora queda hacerlo de la mejor forma. La PEP8 es una guía que indica las convenciones estilísticas a seguir para escribir código Python. Se trata de un conjunto de recomendaciones cuyo objetivo es ayudar a escribir código más legible y abarca desde cómo nombrar variables, al número máximo de caracteres que una línea debe tener.
+
+Dos mismos códigos pueden realizar lo mismo funcionalmente, pero si no se siguen unas directrices estilísticas, se puede acabar teniendo un código muy difícil de leer. Los problemas más frecuentes suelen ser:
+
+Líneas demasiado largas.
+
+Nombres de variables poco explicativos.
+
+Código mal comentado.
+
+Uso incorrecto de espacios y líneas en blanco.
+
+Código mal identado.
+
+Aunque es cierto que ciertas directrices pueden resultar arbitrarias, Python define en la PEP8 las normas estilísticas a seguir para cualquier código parte de la librería estándar, por lo que queda al criterio de cada uno usar estas recomendaciones o no. Sin embargo, prácticamente cualquier código o librería usado por gran cantidad de personas, emplea estas recomendaciones, al haber un amplio consenso en la comunidad.
+
+Formatear Código Python PEP8
+A veces puede resultar complicado acordarnos de todas y cada una de las normas de la PEP8, por lo que hay herramientas que nos ayudan a corregir automáticamente o indicarnos donde hay problemas en nuestro código.
+
+PyCharm
+En este curso decidimos utilizar pyCharm, el cual tiene integrado el analisis de PEP8 y nos resalta con un subrayado en amarillo los posibles problemas que tenemos en nuestro código.
+
+Organización del código - Líneas en Blanco
+Aunque Pycharm puede alertarnos, necesitamos entender cuales son las reglas para darnos cuenta instantaneamente del error.
+
+El uso de líneas en blanco mejora notablemente la legibilidad. Mucho código seguido puede ser difícil de leer, pero un uso excesivo de líneas en blanco puede ser molesto. Python deja su uso a nuestro criterio, siempre y cuando cumplamos lo siguiente:
+
+Rodear las funciones y clases con dos líneas en blanco. Cada vez que definamos una clase o una función es necesario dejar dos líneas en blanco por arriba y dos por abajo.
+
+Dejar una línea en blanco entre los métodos de una clase. Los métodos de una clase deberán tener una línea en blanco entre ellos.
+
+Usar líneas en blanco para agrupar pasos similares. Si tenemos un conjunto de código que realiza una función concreta, es conveniente delimitarlo con una línea en blanco, de la misma manera que un libro separa ideas en párrafos.
+
+ejemplo:
+
+class ClaseA:
+    def metodo_a(self):
+        pass  # pass es una palabra reservada que indica que no vamos a proporcionar la implementación
+
+    def metodo_b(self):
+        pass
+
+
+class ClaseB:
+    def metodo_a(self):
+        pass
+
+    def metodo_b(self):
+        pass
+
+
+def funcion():
+    pass
+
+
+def calcula_media_mediana(valores):
+    # Calculamos la media
+    suma_valores = 0
+    for valor in valores:
+        suma_valores += valor
+    media = suma_valores / len(valores)
+    
+    # Calculamos la mediana
+    valores_ordenados = sorted(valores)
+    indice = len(valores) // 2
+    if len(valores) % 2:
+        mediana = valores_ordenados[indice]
+    else:
+        mediana = (valores_ordenados[indice]
+                   + valores_ordenados[indice + 1]) / 2
+
+    return media, mediana
+
+
+El uso de espacios en blanco puede resultar clave para mejorar la legibilidad de nuestro código, y es por lo que la PEP8 nos dice dónde debemos usar espacios y dónde no. Se trata de buscar un punto de equilibrio entre un código demasiado disperso y con gran cantidad de espacios, y un código demasiado junto donde no se identifican sus partes.
+
+Organización del código - Espacios en Blanco
+Se nos recomienda usar espacio con operadores de asignación.
+
+# Correcto
+x = 5
+
+# Incorrecto
+x=5
+
+# Y también con operadores relacionales.
+
+# Correcto
+if x == 5:
+    pass
+
+# Incorrecto
+if x==5:
+    pass
+
+ojo: Pero cuando tengamos funciones con argumentos por defecto, no debemos dejar espacios.
+
+# Correcto
+def mi_funcion(parameto_por_defecto=5):
+    print(parameto_por_defecto)
+
+# Incorrecto
+def mi_funcion(parameto_por_defecto = 5):
+    print(parameto_por_defecto)
+
+Por otro lado se recomienda no dejar espacios dentro del paréntesis.
+
+def duplica(a):
+    return a * 2
+
+# Correcto
+duplica(2)
+
+# Incorrecto
+duplica( 2 )
+
+# Y tampoco entre corchetes.
+
+# Correcto
+lista = [1, 2, 3]
+
+# Incorrecto
+my_list = [ 1, 2, 3, ]
+
+No usar espacio antes de , en llamadas a funciones o métodos.
+
+# Correcto
+print(x, y)
+
+# Incorrecto
+print(x , y)
+
+# Cuando usemos listas no usar espacios antes del índice o entre el índice y los [].
+
+# Correcto
+lista[0]
+
+# Incorrecto
+lista [1]
+
+# Incorrecto
+lista [ 1 ]
+
+# Tampoco usando diccionarios.
+
+# Correcto
+diccionario['key'] = lista[indice]
+
+# Incorrecto
+diccionario ['key'] = lista [indice]
+
+
+Por último y aunque pueda parecer raro para la gente que venga de otros lenguajes de programación, no se recomienda alinear las variables como se muestra a continuación.
+
+# Correcto
+var_a = 0
+variable_b = 10
+otra_variable_c = 3
+
+# Incorrecto
+var_a           = 0
+variable_b      = 10
+otra_variable_c = 3
+
+Identación del código Como ya hemos visto, Python no usa {} para designar bloques de código como otros lenguajes de programación, sino que usa bloques identados para indicar que un determinado bloque de código pertenece a por ejemplo un if.
+
+if x > 5:
+    pass
+
+Un bloque identado se representa usando cuatro espacios y aunque el uso del tabulador pueda parecer lo mismo, Python 3 no recomienda su uso. Como regla de oro:
+
+Usa siempre cuatro espacios.
+Usa tabuladores si trabajas sobre código ajeno que ya use tabuladores.
+Bajo ningún concepto mezcles uso de espacios y tabuladores.
+Por otro lado, también se puede identar el código para evitar tener líneas muy largas, que resultan difíciles de leer. Es importante recordar que la PEP8 limita el tamaño de línea a 79 caracteres.
+# Correcto
+def mi_funcion(primer_parametro, segundo_parametro,
+               tercer_parametro, cuarto_parametro,
+               quinto_parametro):
+    print("Python")
+
+# Incorrecto
+def mi_funcion(primer_parametro, segundo_parametro, tercer_parametro, cuarto_parametro, quinto_parametro):
+    print("Python")
+
+#Lo siguiente sería incorrecto ya que no se diferencian los argumentos de entrada del bloque de código a ejecutar por la función.
+
+# Incorrecto
+def mi_funcion(primer_parametro, segundo_parametro,
+    tercer_parametro, cuarto_parametro,
+    quinto_parametro):
+    print("Python")
+
+# Análogamente se puede romper un if en diferentes líneas, útil cuando se usan gran cantidad de condiciones que no entran una una línea.
+
+# Correcto
+if (condicion_a and
+        condicion_b):
+    print("Python")
+
+
+
+Organización del código - Tamaño de linea
+Se recomienda limitar el tamaño de cada línea a 79 caracteres, para evitar tener que hacer scroll a la derecha. Este límite también permite tener abiertos múltiples ficheros en la misma pantalla, uno al lado de otro. Por otro lado se limita el uso de docstrings y comentarios a 72 caracteres.
+
+En los casos que tengamos una línea que no sea posible romper, podemos usar \ para continuar con la línea en una nueva. Esto es algo que a veces puede darse en los context managers.
+
+# Correcto
+with open('/esta/ruta/es/muy/pero/que/muy/larga/y/no/entra/en/una/sola/linea/') as fichero_1, \
+     open('/esta/ruta/es/muy/pero/que/muy/larga/y/no/entra/en/una/sola/linea/', 'w') as fichero_2:
+    fichero_2.write(fichero_1.read())
+
+
+Si queremos realizar una operación muy larga que no entra en una línea, tendremos que dividirla en múltiples. Lo recomendado es usar el operador al principio de cada línea, ya que resulta mas fácil de leer.
+
+# Recomendado
+income = (variable_a
+          + variable_b
+          + (variable_c - variable_d)
+          - variable_e
+          - variable_f)
+
+# La siguiente opción no es recomendada pero la PEP8 tampoco la prohíbe.
+
+# No recomendado
+income = (variable_a +
+          variable_b +
+          (variable_c - variable_d) -
+          variable_e -
+          variable_f)
+
+
+Codificación de ficheros
+Los ficheros se codifican por defecto en ASCII para Python 2 y UTF-8 para Python 3, por lo que será necesario definir la codificación que usemos cuando queramos usar otro tipo.
+
+Esto resulta muy importante, ya que si queremos almacenar una cadena que contiene caracteres no UTF-8 como ó y ñ, deberemos especificar el tipo de encoding de acuerdo a la PEP263. El siguiente código puede dar problemas.
+
+# En Python2
+print("La acentuación del Español")
+# SyntaxError: Non-ASCII character '\xe2' in file .../main.py on line 5, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+
+
+Sin embargo, con un pequeño cambio, podemos cambiar la forma en la que se codifica el texto.
+
+# -*- coding: utf-8 -*-
+print("La acentuación del Español")
+# La acentuación del Español
+
+Trabajo Final
+Teniendo en cuenta todo lo anterior, vamos a crear nuestro primer proyecto oficial en Python. Ver [ejercicios clase 11] para leer la primera parte del Trabajo Final.
+
+Nuevo Proyecto
+Empezamos por crear un nuevo proyecto en PyCharm:
+
+Debemos fijarnos si nos creo el venv, sino:
+
+Vamos al menu superior -> Settings -> y buscamos 'Interpreter'
+
+Arriba a la derecha del PyCharm, nos fijamos si está el VirtualEnv:
+
+Luego debemos crear el repo en GitHub:
+
+Luego debemos subir el repo:
+
+Requirements
+Creamos un nuevo file que se va a llamar requirements.txt
+
+En este file iremos agregando las librerias que vamos a utilizar. En principio, la primer libreria que necesitamos es flask.
+
+lask
+
+Estructura de carpetas
+
+app.py
+static
+templates
+
+Ejercicios anteriores
+Al proyecto, agregamos nuestro log.py y proceso_cuentas.py
+
+Servidor
+Al proyecto agregamos app.py con el siguiente contenido:
+
+# import the Flask class from the flask module
+from flask import Flask, render_template
+
+# create the application object
+app = Flask(__name__)
+
+# use decorators to link the function to a url
+@app.route('/')
+def home():
+    return "Hello, World!"  # return a string
+
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html')  # render a template
+
+# start the server with the 'run()' method
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+dentro de la carpeta templates agregar welcome.html con el siguiente contenido:
+
+<HTML>Solo dice WELCOME</HTML>s
+
+🚀 Recursos de la clase
+https://ellibrodepython.com/python-pep8
+
+https://blog.carreralinux.com.ar/2021/08/crear-un-nuevo-repositorio-con-git/
+
+Libro entero de Python con Flask (en ingles): https://www.oreilly.com/library/view/flask-web-development/9781491991725/
