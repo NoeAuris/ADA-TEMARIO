@@ -1,0 +1,190 @@
+Presentacion, Ejemplo, Variables
+🏁 Objetivos
+Enamorarse de la programación, en especial del lenguaje.
+Poder entender código Python ya escrito, entender nuevos requerimientos y ser capaces de escribir un algoritmo que lo resuelva.
+Levantar un Servidor Web escrito en Python (con Flask).
+Manejarse con Git y algunos comandos básicos en la Terminal.
+Uso de base de datos para la persistencia de la información.
+Bienvenidas a Python!
+Python es un lenguaje de alto nivel que permite expresar algoritmos de forma casi directa, ha llegado a considerarse pseudocódigo ejecutable, y está comprobado que se trata de un lenguaje particularmente adecuado para la enseñanza de la programación. Están en el mejor lugar!
+
+Algunas otras ventajas:
+
+Su uso no está ligado a un sector concreto. Por ejemplo el lenguaje R es útil para análisis de datos, pero no puede ser usado para desarrollo web. Python vale para todo.
+Tiene una comunidad enorme, además de gran cantidad de librerías para hacer prácticamente cualquier cosa, literalmente.
+Es un lenguaje multiplataforma, por lo que el mismo código es compatible en cualquier plataforma (Windows, macOS, Linux) sin hacer nada.
+Por lo general se puede hacer desarrollos en Python más rápidamente que en otros lenguajes, acortando la duración de los proyectos.
+Algoritmos
+Los algoritmos son independientes del lenguaje de programación. Describen un procedimiento que puedes implementar en cualquier lenguaje de programación de propósito general, incluso, que puedes ejecutar a mano con lápiz, papel y, quizá, la ayuda de una calculadora.
+
+El primer programa que escribí yo: Calcula tu peso en la luna
+
+Como han visto en la televisión, en la luna los astronautas parecen volar o saltar muy alto, la razón es simple, la gravedad en la luna no es igual a la de la tierra. Por esta razón, si pusieramos una balanza en la luna, y nos pesaramos, no nos daría la misma cantidad de kg que en la Tierra.
+
+En programación me gusta pensar que resolvemos problemas, en este caso el problema es encontrar nuestro peso en la luna, y el dato para resolverlo es: en la luna pesas 1 sexto de lo que pesas en la Tierra.
+
+Cómo lo calcularíamos? Si yo peso 50kg, entonces tengo que dividir 50 por seis, y ese sería el valor que diría la balanza si estuvieramos en la luna.
+
+Pero estamos aprendiendo programación, quiero hacer un programa Meri, no quiero practicar matemática!
+
+Decribimos entonces el procedimiento:
+
+Pesarme, si no se mi peso en la Tierra menos en la Luna.
+Calcular 1/6 de ese peso.
+Imprimir resultado
+Pseudocódigo
+Lo nombré antes y es la forma de aprender a programar. Es escribir los pasos en una forma que luego pueda pasar a cualquier lenguaje.
+
+obtengo el peso
+lo divido
+lo muestro en la pantalla
+en Python esto sería algo como:
+
+input(peso)
+peso/6
+print(peso)
+
+Sintaxis Python
+El termino sintaxis hace referencia al conjunto de reglas que definen como se tiene que escribir el código en un determinado lenguaje de programación. Es decir, hace referencia a la forma en la que debemos escribir las instrucciones para que el ordenador, o más bien lenguaje de programación, nos entienda. A continuación veremos la sintaxis de Python, viendo como podemos empezar a usar el lenguaje creando nuestras primeras variables y estructuras de control.
+
+En la mayoría de lenguajes existe una sintaxis común, como por ejemplo el uso de = para asignar un dato a una variable, o el uso de {} para designar bloques de código, pero Python tiene ciertas particularidades.
+
+La sintaxis es a la programación lo que la gramática es a los idiomas. De la misma forma que la frase “Yo estamos aquí” no es correcta, el siguiente código en Python no sería correcto, ya que no respeta las normas del lenguaje.
+
+if ($variable){
+    x=9;
+}
+
+Lo veremos a continuación en detalle, pero Python no soporta el uso de $ ni hace falta terminar las líneas con ; como en otros lenguajes, y tampoco hay que usar {} en estructuras de control como en el if.
+
+Por otro lado, de la misma forma que un idioma no se habla son simplemente saber todas sus palabras, en la programación no basta con saber la sintaxis de un lenguaje para programar correctamente en él. Es cierto que sabiendo la sintaxis podremos empezar a programar y a hacer lo que queramos, pero el uso de un lenguaje de programación va mucho más allá de la sintaxis.
+
+Palabras reservadas
+Las palabras reservadas, como su nombre lo indican, son palabras las cuales el lenguaje de programación ya ha reservado para realizar ciertas tareas.
+
+import keyword
+print(keyword.kwlist)
+['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+
+
+Comentarios
+Los comentarios son bloques de texto usados para comentar el código. Es decir, para ofrecer a otros programadores o a nuestro yo futuro información relevante acerca del código que está escrito. A efectos prácticos, para Python es como si no existieran, ya que no son código propiamente dicho, son solo anotaciones. Los comentarios se inician con # y todo lo que vaya después en la misma línea será considerado un comentario.
+
+# Esto es un comentario
+
+Al igual que en otros lenguajes de programación, podemos también comentar varias líneas de código. Para ello es necesario hacer uso de triples comillas bien sean simples ' o dobles ". Es necesario usarlas para abrir el bloque del comentario y para cerrarlo.
+
+'''
+Esto es un comentario
+de varias líneas
+de código
+'''
+
+Variables
+Ahora bien, el código que escribimos anteriormente no anda si primero no hablamos de variables: Una variable se refiere a un dato suceptible de ser modificado. Por otro lado, podemos agregar y mencionar las constantes: Una constante es un dato que no cambia de valor.
+
+En nuestro código: peso -> variable 6 (proporción peso Tierra en la Luna) -> constante
+
+Las otras dos cosas que necesito explicar son input() y print() En Python, como en todos los leguajes, existen funciones que nos permiten interactuar. Hay muchas, y podemos importar librerías para usar muchas mas, se aprenden a medida que se usan y no es obligatorio saberlas de memoria, se googlean :)
+
+input() -> nos permite leer un valor que es ingresado por el usuario print() -> nos permite imprimir y mostrarle al usuario el valor de una variable o constante
+
+proporcion_luna = 6
+peso = input()
+peso = peso / proporcion_luna
+print(peso)
+
+Funciones
+No podemos comenzar a programar, en mi opinion, si no hablamos de funciones: una abstracción de un grupo de operaciones o un algoritmo.
+
+Supongamos que queremos ahora calcular nuestro peso en Mercurio:
+
+proporcion_mercurio = 3
+peso = input()
+peso = peso / proporcion_mercurio
+print(peso)
+
+Podemos hacer una funcion a la cual le indicamos la proporcion:
+
+proporcion_luna = 6
+proporcion_mercurio = 3
+peso = int(input())
+
+def calculadora_de_peso(peso, proporcion):
+    peso = peso / proporcion
+    print(peso)
+
+calculadora_de_peso(peso, proporcion_luna)
+calculadora_de_peso(peso, proporcion_mercurio)
+
+El ejemplo anterior tiene un problema de compatibilidad entre Python2 y Python3. Para entenderlo, hay que leer la siguiente seccion: Tipos de datos.
+
+Si tenemos tiempo: qué problema tiene si lo corremos con Python2? Para responder, tenemos que ejecutar el programa (peso.py) con nuestro peso y comparar el valor con el valor haciendo la cuenta con calculadora.
+
+Tipos de datos en Python
+https://j2logo.com/python/tutorial/tipos-de-datos-basicos-de-python/
+
+Numéricos
+El tipo de los números enteros es int. Este tipo de dato comprende el conjunto de todos los números enteros.
+
+Y los no enteros?
+Este tipo de datos en Python es float. Puedes usar el tipo float sin problemas para representar cualquier número real (siempre teniendo en cuenta que es una aproximación lo más precisa posible). Por tanto para longitudes, pesos, frecuencias, …, en los que prácticamente es lo mismo 3,3 que 3,3000000000000003 el tipo float es el más apropiado.
+
+Boolean o booleanos
+En Python la clase que representa los valores booleanos es bool. Esta clase solo se puede instanciar con dos valores/objetos: True para representar verdadero y False para representar falso. Prestar atención que empiezan con mayúsculas!
+
+String o cadena de caracteres
+Una vez que hemos acabado con los números, es el turno de las letras 😜 Otro tipo básico de Python, e imprescindible, son las secuencias o cadenas de caracteres. Este tipo es conocido como string aunque su clase verdadera es str. Formalmente, un string es una secuencia inmutable de caracteres en formato Unicode. Para crear un string, simplemente tienes que encerrar entre comillas simples '' o dobles "" una secuencia de caracteres.
+
+Otros
+Hasta aquí hemos repasado los tipos de datos básicos de Python, sin embargo, el lenguaje ofrece muchos tipos más.
+
+Las listas son secuencias mutables de valores. Las tuplas son secuencias inmutables de valores. Los conjuntos se utilizan para representar conjuntos únicos de elementos, es decir, en un conjunto no pueden existir dos objetos iguales. Los diccionarios son tipos especiales de contenedores en los que se puede acceder a sus elementos a partir de una clave única.
+
+lista = [1, 2, 3, 8, 9]
+tupla = (1, 4, 8, 0, 5)
+conjunto = set([1, 3, 1, 4])
+diccionario = {'a': 1, 'b': 3, 'z': 8}
+print(lista)
+[1, 2, 3, 8, 9]
+print(tupla)
+(1, 4, 8, 0, 5)
+print(conjunto)
+{1, 3, 4}
+print(diccionario)
+{'a': 1, 'b': 3, 'z': 8}
+
+Herramientas de desarrollo
+https://ellibrodepython.com/descargar-instalar-python
+
+La consola
+Depende del sistema operativo. En Windows se llama cmd: https://www.muycomputer.com/2018/10/25/consola-de-windows-guia/ En MacOs y Linux se llama terminal.
+
+Pero una buena forma comenzar sin frustraciones es usar una herramienta online, por ejemplo: https://www.online-python.com/
+
+YAPA: The Zen of Python
+El Zen de Python es una colección de los 19 principios que influyen en el diseño del lenguaje. De alguna manera, muestran la filosofía del mismo y pueden ser encontrados en la PEP20[9] Las PEP o Python Enhancement Prososals son unos documentos que ofrecen información a la comunidad de Python, bien describiendo alguna característica nueva o dando información en general.
+
+Son las siguientes, y aunque alguna pueda parecer lógica, a veces resultan no serlo tanto cuando no se cumplen:
+
+Bello es mejor que feo.
+Explícito es mejor que implícito.
+Simple es mejor que complejo.
+Complejo es mejor que complicado.
+Plano es mejor que anidado.
+Espaciado es mejor que denso.
+La legibilidad es importante.
+Los casos especiales no son lo suficientemente especiales como para romper las reglas.
+Sin embargo la practicidad gana a la pureza.
+Los errores nunca deben pasar silenciosamente.
+A menos que se silencien explícitamente.
+Frente a la ambigüedad, evitar la tentación de adivinar.
+Debería haber una, y preferiblemente solo una, manera obvia de hacerlo.
+A pesar de que esa manera no sea obvia a menos que seas Holandés (el creador lo era)
+Ahora es mejor que nunca.
+A pesar de que nunca es muchas veces mejor que ahora mismo.
+Si la implementación es difícil de explicar, es una mala idea.
+Si la implementación es fácil de explicar, puede que sea una buena idea.
+Los namespaces son una gran idea, ¡tengamos más de esos!
+Documentación
+https://docs.python.org/3.10/tutorial/index.html
